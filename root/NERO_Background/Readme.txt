@@ -1,0 +1,24 @@
+Readme for root script Nero_background.C
+
+
+Use: Output and documentation of background runs. This way, you can compare
+and recognize noise and strange channels.
+
+
+This script:
+
+- loads a scaler file
+- Draws a canvas of all channels and all quads
+- saves the canvas
+
+
+available functions:
+
+
+
+readfile("filename.scalers")		reads the scalerfile, to be displayed
+
+Output("filename.XXX")			shows the data in histograms for 
+					all quads and saves canvas to filename.XXX
+					to the current directory
+					XXX can be pdf,ps,jpg,gif,c,...

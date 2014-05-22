@@ -1,0 +1,71 @@
+                     Set a new title please
+                     Run: 419
+                     Started: Sat Feb 07 04:52:15 PM EST 2009
+                     Ended:  Sat Feb 07 04:53:10 PM EST 2009
+                     Duration: 0 00:00:20
+ Scaler Name        Scaler Total  Avg Rate     Std. Dev           
+------------------------------------------------------------------
+    QuadA.01            1         0.05         0.05
+    QuadA.02            2         0.10         0.10
+    QuadA.03            0         0.00         0.00
+    QuadA.04            2         0.10         0.07
+    QuadA.05           16         0.80         0.58
+    QuadA.06            1         0.05         0.05
+    QuadA.07           20         1.00         0.44
+    QuadA.08            2         0.10         0.00
+    QuadA.09            0         0.00         0.00
+    QuadA.10            1         0.05         0.05
+    QuadA.11            0         0.00         0.00
+    QuadA.12            1         0.05         0.05
+    QuadA.13            3         0.15         0.13
+    QuadA.14           16         0.80         0.58
+    QuadA.15            2         0.10         0.00
+    QuadA.16            3         0.15         0.11
+    QuadB.01            0         0.00         0.00
+    QuadB.02            1         0.05         0.05
+    QuadB.03            0         0.00         0.00
+    QuadB.04            0         0.00         0.00
+    QuadB.05            1         0.05         0.05
+    QuadB.06            2         0.10         0.10
+    QuadB.07            1         0.05         0.05
+    QuadB.08            1         0.05         0.05
+    QuadB.09            2         0.10         0.10
+    QuadB.10            2         0.10         0.10
+    QuadB.11            5         0.25         0.24
+    QuadB.12            8         0.40         0.28
+    QuadB.13           10         0.50         0.47
+    QuadB.14            3         0.15         0.05
+    QuadB.15            8         0.40         0.34
+    QuadB.16          173         8.65         7.09
+    QuadC.01            0         0.00         0.00
+    QuadC.02            2         0.10         0.10
+    QuadC.03            3         0.15         0.11
+    QuadC.04            0         0.00         0.00
+    QuadC.05            2         0.10         0.10
+    QuadC.06            1         0.05         0.05
+    QuadC.07            4         0.20         0.17
+    QuadC.08            2         0.10         0.00
+    QuadC.09            3         0.15         0.13
+    QuadC.10            5         0.25         0.13
+    QuadC.11            1         0.05         0.05
+    QuadC.12            4         0.20         0.17
+    QuadC.13            8         0.40         0.24
+    QuadC.14            3         0.15         0.13
+    QuadC.15            4         0.20         0.14
+    QuadC.16           82         4.10         0.88
+    QuadD.01            0         0.00         0.00
+    QuadD.02            0         0.00         0.00
+    QuadD.03            2         0.10         0.00
+    QuadD.04            1         0.05         0.05
+    QuadD.05            1         0.05         0.05
+    QuadD.06            1         0.05         0.05
+    QuadD.07            3         0.15         0.13
+    QuadD.08            4         0.20         0.12
+    QuadD.09            0         0.00         0.00
+    QuadD.10            5         0.25         0.21
+    QuadD.11            2         0.10         0.07
+    QuadD.12            1         0.05         0.05
+    QuadD.13            2         0.10         0.10
+    QuadD.14            1         0.05         0.05
+    QuadD.15            4         0.20         0.17
+    QuadD.16            0         0.00         0.00

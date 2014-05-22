@@ -1,0 +1,48 @@
+int fit() {
+  
+  cout << "start of fit procedure" << endl;
+
+  readsource("source/CRS_QDC_00.dat",62390);
+  readbackgr("background/CRS_QDC_00.dat",86407);
+  corr();
+
+
+  TCanvas* c1 = new TCanvas("c1","c1",800,600);
+
+
+
+  int maxbin=-1;
+  Double_t maxvalue=-1;
+  Double_t tempbin=0;
+
+  TString text="";
+
+  hcorr->GetXaxis()->SetRange(200,4000);
+  maxbin=hcorr->GetMaximumBin();
+  maxvalue=hcorr->GetBinContent(maxbin);
+  hcorr->GetXaxis()->SetRange(0,4095);
+
+  TF1* f1 = new TF1("f1","[0]*exp(-((x-[1])^2)/[2])");
+  f1->SetParameter(0,maxvalue);
+  f1->SetParameter(1,maxbin);
+  f1->SetParameter(2,1);
+
+  f1->SetLineColor(2);
+
+  hcorr->SetMinimum(0);
+  hcorr->SetMaximum(1.2*maxvalue);
+
+  hcorr->Fit("f1","","",maxbin-maxbin/6,4095);
+
+  tempbin=sqrt(-log(maxvalue*2/3/(f1->GetParameter(0)))*(f1->GetParameter(2)))+f1->GetParameter(1);
+
+  cout << "2/3 of maximum height is in bin " << tempbin << "->" <<int(tempbin+0.5) << endl;
+
+
+
+  
+  cout << endl << "max bin = " << maxbin << " with content = " << maxvalue << endl;
+
+
+
+}

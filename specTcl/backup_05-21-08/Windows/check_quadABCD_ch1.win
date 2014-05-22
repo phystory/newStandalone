@@ -1,0 +1,87 @@
+Geometry 4,3
+# /user/nerotest/Standalone/specTcl/Windows/check_quadABCD_ch1.win Written by @(#)dispwind.cc	2.2 1/28/94  at Tue Mar 18 12:09:47 2008
+
+Window  0,0,"QUADA_1"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  1,0,"QUADB_1"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  2,0,"QUADC_1"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  3,0,"QUADD_1"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  0,1,"QUADATIME1"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,16
+Endwindow
+Window  1,1,"QUADBTIME1"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,16
+Endwindow
+Window  2,1,"QUADCTIME1"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,16
+Endwindow
+Window  3,1,"QUADDTIME1"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,16
+Endwindow
+Window  0,2,"QUADA_1!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  1,2,"QUADB_1!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  2,2,"QUADC_1!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  3,2,"QUADD_1!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow

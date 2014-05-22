@@ -1,0 +1,99 @@
+# SeGAInit.tcl -- SeGA initialization file
+# SpecTcl source file: 01016_bdecayspec.cpp
+# Last modified 2004/04/24 by add
+
+
+# Set SeGA energy calibration variables
+# All intercepts are based on a 13-bit scale
+
+# sega calibration from SRM calibration by ADD 
+# entered by pfm 4/30/04
+
+
+
+ set bdecayv.sega.square.01 -1.8362E-7
+ set bdecayv.sega.square.02 +7.8829E-8
+ set bdecayv.sega.square.03 -1.4939E-7
+ set bdecayv.sega.square.04 -1.0348E-7
+ set bdecayv.sega.square.05 -1.6312E-7
+ set bdecayv.sega.square.06 -1.0352E-7
+ set bdecayv.sega.square.09 -2.5128E-7
+ set bdecayv.sega.square.10 -2.8419E-7
+ set bdecayv.sega.square.11 -2.0971E-7
+ set bdecayv.sega.square.12 -8.3542E-8
+ set bdecayv.sega.square.13 -7.9591E-9
+ set bdecayv.sega.square.14 +1.2664E-5
+
+set bdecayv.sega.slope.01 0.50176
+set bdecayv.sega.slope.02 0.50182
+set bdecayv.sega.slope.03 0.49946
+set bdecayv.sega.slope.04 0.49958
+set bdecayv.sega.slope.05 0.49730
+set bdecayv.sega.slope.06 0.50191
+set bdecayv.sega.slope.09 0.49895
+set bdecayv.sega.slope.10 0.50031
+set bdecayv.sega.slope.11 0.49799
+set bdecayv.sega.slope.12 0.50010
+set bdecayv.sega.slope.13 0.50245
+set bdecayv.sega.slope.14 0.45256
+
+set bdecayv.sega.intercept.01 +0.1154
+set bdecayv.sega.intercept.02 -0.11798
+set bdecayv.sega.intercept.03 +0.23080
+set bdecayv.sega.intercept.04 +0.41623
+set bdecayv.sega.intercept.05 +5.2331
+set bdecayv.sega.intercept.06 +0.14158
+set bdecayv.sega.intercept.09 +2.4613
+set bdecayv.sega.intercept.10 +0.73190
+set bdecayv.sega.intercept.11 +1.0588
+set bdecayv.sega.intercept.12 +2.5065
+set bdecayv.sega.intercept.13 -0.6239
+set bdecayv.sega.intercept.14 +15.567
+
+
+# Set SeGA energy thresholds
+# All intercepts are based on a 13-bit scale
+
+set bdecayv.sega.thresh.01 30
+set bdecayv.sega.thresh.02 30
+set bdecayv.sega.thresh.03 30
+set bdecayv.sega.thresh.04 30
+set bdecayv.sega.thresh.05 30
+set bdecayv.sega.thresh.06 30
+set bdecayv.sega.thresh.09 30
+set bdecayv.sega.thresh.10 30
+set bdecayv.sega.thresh.11 30
+set bdecayv.sega.thresh.12 30
+set bdecayv.sega.thresh.13 30
+set bdecayv.sega.thresh.14 30
+
+# Sega TDC calibrations
+
+set bdecayv.sega.tdcintercept.01  -39.0 
+set bdecayv.sega.tdcintercept.02  -36.0
+set bdecayv.sega.tdcintercept.03  -38.0
+set bdecayv.sega.tdcintercept.04  +9.0
+set bdecayv.sega.tdcintercept.05  +3.0
+set bdecayv.sega.tdcintercept.06  +1.0
+set bdecayv.sega.tdcintercept.09  -11.0
+set bdecayv.sega.tdcintercept.10  -21.0
+set bdecayv.sega.tdcintercept.11  -34.0 
+set bdecayv.sega.tdcintercept.12  +13.0
+set bdecayv.sega.tdcintercept.13  +9.0
+set bdecayv.sega.tdcintercept.14  -11.0
+
+set bdecayv.sega.tdcslope.01  1.0
+set bdecayv.sega.tdcslope.02  1.0
+set bdecayv.sega.tdcslope.03  1.0
+set bdecayv.sega.tdcslope.04  1.0
+set bdecayv.sega.tdcslope.05  1.0
+set bdecayv.sega.tdcslope.06  1.0
+set bdecayv.sega.tdcslope.09  1.0
+set bdecayv.sega.tdcslope.10  1.0
+set bdecayv.sega.tdcslope.11  1.0
+set bdecayv.sega.tdcslope.12  1.0
+set bdecayv.sega.tdcslope.13  1.0
+set bdecayv.sega.tdcslope.14  1.0
+
+# end of variable initialization
+

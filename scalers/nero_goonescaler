@@ -1,0 +1,3 @@
+cd $HOME/Standalone/scalers/
+export DAQHOST=spdaq28
+ScalerDisplay nero_onescaler.tab

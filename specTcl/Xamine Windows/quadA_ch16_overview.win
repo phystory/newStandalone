@@ -1,0 +1,32 @@
+Geometry 1,4
+# /user/nerotest/Standalone/specTcl/Windows/quadA_ch16_overview.win Written by @(#)dispwind.cc	2.2 1/28/94  at Wed Mar 19 15:06:13 2008
+
+Window  0,0,"QUADA_16"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1200
+Endwindow
+Window  0,1,"QUADATIME16"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 0
+   Expanded 0,1024
+Endwindow
+Window  0,2,"QUADA_16!TDC"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  0,3,"QUADA_16!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow

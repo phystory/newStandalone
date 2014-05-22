@@ -1,0 +1,698 @@
+#include <tcl.h>
+
+
+
+proc help {} {
+
+  puts ""
+  puts " available commands:"
+  puts ""
+  puts "   save (runname)                  writes spectra to folder (runname)"
+  puts "   integrate (Spectrum Start Stop) integrates bins from Start to Stop"
+  puts "   sum (group spectra)             shows channelsum and groupsum"
+  puts "   help                            shows available procedures"
+  puts ""
+}
+
+
+proc save {runname} {
+
+  exec mkdir ../ClemensData/$runname
+  exec mkdir ../ClemensData/$runname/ADC
+  exec mkdir ../ClemensData/$runname/TDC
+  exec mkdir ../ClemensData/$runname/ADC!TDC
+  exec mkdir ../ClemensData/$runname/ADC!TDC_ch2
+  exec cp ../scalers/$runname.scalers ../ClemensData/$runname/
+  exec cp ../readout/cfd
+
+
+    for { set i 1 } { $i<17 } {incr i } {
+
+      swrite -format ascii ../ClemensData/$runname/ADC!TDC_ch2/quadA_$i!TDC_ch2.dat quadA_$i!TDC_ch2
+      swrite -format ascii ../ClemensData/$runname/ADC!TDC_ch2/quadB_$i!TDC_ch2.dat quadB_$i!TDC_ch2
+      swrite -format ascii ../ClemensData/$runname/ADC!TDC_ch2/quadC_$i!TDC_ch2.dat quadC_$i!TDC_ch2
+      swrite -format ascii ../ClemensData/$runname/ADC!TDC_ch2/quadD_$i!TDC_ch2.dat quadD_$i!TDC_ch2
+
+      swrite -format ascii ../ClemensData/$runname/ADC!TDC/quadA_$i!TDC.dat quadA_$i!TDC
+      swrite -format ascii ../ClemensData/$runname/ADC!TDC/quadB_$i!TDC.dat quadB_$i!TDC
+      swrite -format ascii ../ClemensData/$runname/ADC!TDC/quadC_$i!TDC.dat quadC_$i!TDC
+      swrite -format ascii ../ClemensData/$runname/ADC!TDC/quadD_$i!TDC.dat quadD_$i!TDC
+
+      swrite -format ascii ../ClemensData/$runname/ADC/quadA_$i.dat quadA_$i
+      swrite -format ascii ../ClemensData/$runname/ADC/quadB_$i.dat quadB_$i
+      swrite -format ascii ../ClemensData/$runname/ADC/quadC_$i.dat quadC_$i
+      swrite -format ascii ../ClemensData/$runname/ADC/quadD_$i.dat quadD_$i
+
+      swrite -format ascii ../ClemensData/$runname/TDC/quadA_$i.dat quadAtime$i
+      swrite -format ascii ../ClemensData/$runname/TDC/quadB_$i.dat quadBtime$i
+      swrite -format ascii ../ClemensData/$runname/TDC/quadC_$i.dat quadCtime$i
+      swrite -format ascii ../ClemensData/$runname/TDC/quadD_$i.dat quadDtime$i
+    }
+
+
+}
+
+proc integrate {spectrum chStart chStop} {
+
+  set event 0
+  set events 0
+  for { set i $chStart } { $i<$chStop+1 } {incr i } {
+    set event [channel -get $spectrum "$i"]
+    set events [expr $events+$event]
+#    puts "$i - $event"
+  }
+  puts "integrated: $events"
+  return [puts "$events"]
+}
+
+
+proc sum {group spectra} {
+
+  set event_quad 0
+  set string_ "_"
+#-----Configuration of quads and channels-----#
+
+    set quadA_1 quadA_1$spectra
+    set quadA_2 quadA_2$spectra
+    set quadA_3 quadA_3$spectra
+    set quadA_4 quadA_4$spectra
+    set quadA_5 quadA_5$spectra
+    set quadA_6 quadA_6$spectra
+    set quadA_7 quadA_7$spectra
+    set quadA_8 quadA_8$spectra
+    set quadA_9 quadA_16$spectra
+    set quadA_10 quadA_10$spectra
+    set quadA_11 quadA_11$spectra
+    set quadA_12 quadA_12$spectra
+    set quadA_13 quadA_13$spectra
+    set quadA_14 quadA_14$spectra
+    set quadA_15 quadA_15$spectra
+
+    set quadB_1 quadB_1$spectra
+    set quadB_2 quadB_2$spectra
+    set quadB_3 quadB_3$spectra
+    set quadB_4 quadB_4$spectra
+    set quadB_5 quadB_5$spectra
+    set quadB_6 quadB_6$spectra
+    set quadB_7 quadB_7$spectra
+    set quadB_8 quadB_8$spectra
+    set quadB_9 quadB_9$spectra
+    set quadB_10 quadB_10$spectra
+    set quadB_11 quadB_11$spectra
+    set quadB_12 quadB_12$spectra
+    set quadB_13 quadB_13$spectra
+    set quadB_14 quadB_14$spectra
+    set quadB_15 quadB_15$spectra
+
+    set quadC_1 quadC_1$spectra
+    set quadC_2 quadC_2$spectra
+    set quadC_3 quadC_3$spectra
+    set quadC_4 quadC_4$spectra
+    set quadC_5 quadC_5$spectra
+    set quadC_6 quadC_6$spectra
+    set quadC_7 quadC_7$spectra
+    set quadC_8 quadC_8$spectra
+    set quadC_9 quadC_9$spectra
+    set quadC_10 quadC_10$spectra
+    set quadC_11 quadC_11$spectra
+    set quadC_12 quadC_12$spectra
+    set quadC_13 quadC_13$spectra
+    set quadC_14 quadC_14$spectra
+    set quadC_15 quadC_15$spectra
+
+    set quadD_1 quadD_1$spectra
+    set quadD_2 quadD_2$spectra
+    set quadD_3 quadD_3$spectra
+    set quadD_4 quadD_4$spectra
+    set quadD_5 quadD_5$spectra
+    set quadD_6 quadD_6$spectra
+    set quadD_7 quadD_7$spectra
+    set quadD_8 quadD_8$spectra
+    set quadD_9 quadD_9$spectra
+    set quadD_10 quadD_10$spectra
+    set quadD_11 quadD_11$spectra
+    set quadD_12 quadD_12$spectra
+    set quadD_13 quadD_13$spectra
+    set quadD_14 quadD_14$spectra
+    set quadD_15 quadD_15$spectra
+
+#-----end of Configuration of quads and channels-----#
+
+
+#-----Configuration of ring1 and channels-----#
+
+    set ring1_1 quadA_1$spectra
+    set ring1_2 quadA_2$spectra
+    set ring1_3 quadA_3$spectra
+    set ring1_4 quadA_4$spectra
+
+    set ring1_5 quadB_1$spectra
+    set ring1_6 quadB_2$spectra
+    set ring1_7 quadB_3$spectra
+    set ring1_8 quadB_4$spectra
+
+    set ring1_9 quadC_1$spectra
+    set ring1_10 quadC_2$spectra
+    set ring1_11 quadC_3$spectra
+    set ring1_12 quadC_4$spectra
+
+    set ring1_13 quadD_1$spectra
+    set ring1_14 quadD_2$spectra
+    set ring1_15 quadD_3$spectra
+    set ring1_16 quadD_4$spectra
+
+#-----end of Configuration of rings and channels-----#
+
+
+#-----Configuration of ring2 and channels-----#
+
+    set ring2_1 quadA_6$spectra
+    set ring2_2 quadA_5$spectra
+    set ring2_3 quadA_7$spectra
+    set ring2_4 quadA_8$spectra
+    set ring2_5 quadA_16$spectra
+
+    set ring2_6 quadB_5$spectra
+    set ring2_7 quadB_6$spectra
+    set ring2_8 quadB_7$spectra
+    set ring2_9 quadB_8$spectra
+    set ring2_10 quadB_9$spectra
+
+    set ring2_11 quadC_5$spectra
+    set ring2_12 quadC_6$spectra
+    set ring2_13 quadC_7$spectra
+    set ring2_14 quadC_8$spectra
+    set ring2_15 quadC_9$spectra
+
+    set ring2_16 quadD_5$spectra
+    set ring2_17 quadD_6$spectra
+    set ring2_18 quadD_7$spectra
+    set ring2_19 quadD_8$spectra
+    set ring2_20 quadD_9$spectra
+
+#-----end of Configuration of rings and channels-----#
+
+
+#-----Configuration of ring3 and channels-----#
+
+    set ring3_1 quadA_10$spectra
+    set ring3_2 quadA_11$spectra
+    set ring3_3 quadA_12$spectra
+    set ring3_4 quadA_13$spectra
+    set ring3_5 quadA_14$spectra
+    set ring3_6 quadA_15$spectra
+
+    set ring3_7 quadB_10$spectra
+    set ring3_8 quadB_11$spectra
+    set ring3_9 quadB_12$spectra
+    set ring3_10 quadB_13$spectra
+    set ring3_11 quadB_14$spectra
+    set ring3_12 quadB_15$spectra
+
+    set ring3_13 quadC_10$spectra
+    set ring3_14 quadC_11$spectra
+    set ring3_15 quadC_12$spectra
+    set ring3_16 quadC_13$spectra
+    set ring3_17 quadC_14$spectra
+    set ring3_18 quadC_15$spectra
+
+    set ring3_19 quadD_10$spectra
+    set ring3_20 quadD_11$spectra
+    set ring3_21 quadD_12$spectra
+    set ring3_22 quadD_13$spectra
+    set ring3_23 quadD_14$spectra
+    set ring3_24 quadD_15$spectra
+
+#-----end of Configuration of rings and channels-----#
+
+
+  if {$group == "quadA" || $group == "quadB" || $group == "quadC" || $group == "quadD"} {
+
+    foreach num {1 2 3 4 5 6 7 8 9 10 11 12 13 14 15} {
+
+      set spectrum "[set $group$string_$num]"
+      set event_ch 0
+      set event_tube 0
+      for { set i 0 } { $i<4095+1 } {incr i } {
+        set event_ch [channel -get "$spectrum" "$i"]
+        set event_tube [expr $event_tube+$event_ch]
+      }
+      puts "$spectrum has detected $event_tube events"
+      set event_quad [expr $event_quad+$event_tube]  
+    }
+
+  puts ""
+  puts "$group$spectra has $event_quad counts"
+  puts ""
+  }
+
+
+
+
+  if {$group == "ring1"} {
+
+    set event_ring 0
+
+    foreach num {1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16} {
+
+      set spectrum "[set ring1_$num]"
+      set event_ch 0
+      set event_tube 0
+      for { set i 0 } { $i<4095+1 } {incr i } {
+        set event_ch [channel -get "$spectrum" "$i"]
+        set event_tube [expr $event_tube+$event_ch]
+      }
+      puts "$spectrum has detected $event_tube events"
+      set event_ring [expr $event_ring+$event_tube]  
+    }
+
+  puts ""
+  puts "$group$spectra has $event_ring counts"
+  }
+
+
+
+
+  if {$group == "ring2"} {
+
+    set event_ring 0
+
+    foreach num {1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20} {
+
+      set spectrum "[set ring2_$num]"
+      set event_ch 0
+      set event_tube 0
+      for { set i 0 } { $i<4095+1 } {incr i } {
+        set event_ch [channel -get "$spectrum" "$i"]
+        set event_tube [expr $event_tube+$event_ch]
+      }
+      puts "$spectrum has detected $event_tube events"
+      set event_ring [expr $event_ring+$event_tube]  
+    }
+
+  puts ""
+  puts "$group$spectra has $event_ring counts"
+  }
+
+
+
+
+  if {$group == "ring3"} {
+
+    set event_ring 0
+
+    foreach num {1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24} {
+
+      set spectrum "[set ring3_$num]"
+      set event_ch 0
+      set event_tube 0
+      for { set i 0 } { $i<4095+1 } {incr i } {
+        set event_ch [channel -get "$spectrum" "$i"]
+        set event_tube [expr $event_tube+$event_ch]
+      }
+      puts "$spectrum has detected $event_tube events"
+      set event_ring [expr $event_ring+$event_tube]  
+    }
+
+  puts ""
+  puts "$group$spectra has $event_ring counts"
+  }
+
+
+
+
+  if {$group == "all"} {
+
+    set event_all 0
+  
+    foreach grouptemp {quadA quadB quadC quadD} { 
+
+      foreach num {1 2 3 4 5 6 7 8 9 10 11 12 13 14 15} {
+
+        set spectrum "[set $grouptemp$string_$num]"
+        set event_ch 0
+        set event_tube 0
+        for { set i 0 } { $i<4095+1 } {incr i } {
+          set event_ch [channel -get "$spectrum" "$i"]
+          set event_tube [expr $event_tube+$event_ch]
+        }
+        puts "$spectrum has detected $event_tube events"
+        set event_quad [expr $event_quad+$event_tube]  
+      }
+ 
+      set event_all [expr $event_all+$event_quad]  
+
+      puts ""
+      puts "$grouptemp$spectra has $event_quad counts"
+      puts ""
+    }
+
+    puts ""
+    puts "$group$spectra has $event_all counts"
+    puts ""
+
+  }
+
+
+   
+  if {$group != "quadA" && $group != "quadB" && $group != "quadC" && $group != "quadD" && $group != "ring1" && $group != "ring2" && $group != "ring3" && $group != "all"} {
+    
+    puts "Unknown group parameter"
+    puts ""
+    puts "Valid group names are:"
+    puts "   quadA"
+    puts "   quadB"
+    puts "   quadC"
+    puts "   quadD"
+    puts "   all"
+    puts "   ring1 (inner ring)"
+    puts "   ring2 (middle ring)"
+    puts "   ring1 (outer ring)"
+    puts ""
+    puts "All commands are case sensitive."
+    puts "Check tube-channel routing in tcl-file if cables are changed."
+
+  }
+
+ 
+  puts "----------------"
+  puts "end of procedure"
+  puts ""
+}
+
+
+
+
+proc savesum {spectra fname runtime} {
+
+  set event_quad 0
+  set string_ "_"
+#-----Configuration of quads and channels-----#
+
+    set quadA_1 quadA_1$spectra
+    set quadA_2 quadA_2$spectra
+    set quadA_3 quadA_3$spectra
+    set quadA_4 quadA_4$spectra
+    set quadA_5 quadA_5$spectra
+    set quadA_6 quadA_6$spectra
+    set quadA_7 quadA_7$spectra
+    set quadA_8 quadA_8$spectra
+    set quadA_9 quadA_16$spectra
+    set quadA_10 quadA_10$spectra
+    set quadA_11 quadA_11$spectra
+    set quadA_12 quadA_12$spectra
+    set quadA_13 quadA_13$spectra
+    set quadA_14 quadA_14$spectra
+    set quadA_15 quadA_15$spectra
+
+    set quadB_1 quadB_1$spectra
+    set quadB_2 quadB_2$spectra
+    set quadB_3 quadB_3$spectra
+    set quadB_4 quadB_4$spectra
+    set quadB_5 quadB_5$spectra
+    set quadB_6 quadB_6$spectra
+    set quadB_7 quadB_7$spectra
+    set quadB_8 quadB_8$spectra
+    set quadB_9 quadB_9$spectra
+    set quadB_10 quadB_10$spectra
+    set quadB_11 quadB_11$spectra
+    set quadB_12 quadB_12$spectra
+    set quadB_13 quadB_13$spectra
+    set quadB_14 quadB_14$spectra
+    set quadB_15 quadB_15$spectra
+
+    set quadC_1 quadC_1$spectra
+    set quadC_2 quadC_2$spectra
+    set quadC_3 quadC_3$spectra
+    set quadC_4 quadC_4$spectra
+    set quadC_5 quadC_5$spectra
+    set quadC_6 quadC_6$spectra
+    set quadC_7 quadC_7$spectra
+    set quadC_8 quadC_8$spectra
+    set quadC_9 quadC_9$spectra
+    set quadC_10 quadC_10$spectra
+    set quadC_11 quadC_11$spectra
+    set quadC_12 quadC_12$spectra
+    set quadC_13 quadC_13$spectra
+    set quadC_14 quadC_14$spectra
+    set quadC_15 quadC_15$spectra
+
+    set quadD_1 quadD_1$spectra
+    set quadD_2 quadD_2$spectra
+    set quadD_3 quadD_3$spectra
+    set quadD_4 quadD_4$spectra
+    set quadD_5 quadD_5$spectra
+    set quadD_6 quadD_6$spectra
+    set quadD_7 quadD_7$spectra
+    set quadD_8 quadD_8$spectra
+    set quadD_9 quadD_9$spectra
+    set quadD_10 quadD_10$spectra
+    set quadD_11 quadD_11$spectra
+    set quadD_12 quadD_12$spectra
+    set quadD_13 quadD_13$spectra
+    set quadD_14 quadD_14$spectra
+    set quadD_15 quadD_15$spectra
+
+#-----end of Configuration of quads and channels-----#
+
+
+#-----Configuration of ring1 and channels-----#
+
+    set ring1_1 quadA_1$spectra
+    set ring1_2 quadA_2$spectra
+    set ring1_3 quadA_3$spectra
+    set ring1_4 quadA_4$spectra
+
+    set ring1_5 quadB_1$spectra
+    set ring1_6 quadB_2$spectra
+    set ring1_7 quadB_3$spectra
+    set ring1_8 quadB_4$spectra
+
+    set ring1_9 quadC_1$spectra
+    set ring1_10 quadC_2$spectra
+    set ring1_11 quadC_3$spectra
+    set ring1_12 quadC_4$spectra
+
+    set ring1_13 quadD_1$spectra
+    set ring1_14 quadD_2$spectra
+    set ring1_15 quadD_3$spectra
+    set ring1_16 quadD_4$spectra
+
+#-----end of Configuration of rings and channels-----#
+
+
+#-----Configuration of ring2 and channels-----#
+
+    set ring2_1 quadA_6$spectra
+    set ring2_2 quadA_5$spectra
+    set ring2_3 quadA_7$spectra
+    set ring2_4 quadA_8$spectra
+    set ring2_5 quadA_16$spectra
+
+    set ring2_6 quadB_5$spectra
+    set ring2_7 quadB_6$spectra
+    set ring2_8 quadB_7$spectra
+    set ring2_9 quadB_8$spectra
+    set ring2_10 quadB_9$spectra
+
+    set ring2_11 quadC_5$spectra
+    set ring2_12 quadC_6$spectra
+    set ring2_13 quadC_7$spectra
+    set ring2_14 quadC_8$spectra
+    set ring2_15 quadC_9$spectra
+
+    set ring2_16 quadD_5$spectra
+    set ring2_17 quadD_6$spectra
+    set ring2_18 quadD_7$spectra
+    set ring2_19 quadD_8$spectra
+    set ring2_20 quadD_9$spectra
+
+#-----end of Configuration of rings and channels-----#
+
+
+#-----Configuration of ring3 and channels-----#
+
+    set ring3_1 quadA_10$spectra
+    set ring3_2 quadA_11$spectra
+    set ring3_3 quadA_12$spectra
+    set ring3_4 quadA_13$spectra
+    set ring3_5 quadA_14$spectra
+    set ring3_6 quadA_15$spectra
+
+    set ring3_7 quadB_10$spectra
+    set ring3_8 quadB_11$spectra
+    set ring3_9 quadB_12$spectra
+    set ring3_10 quadB_13$spectra
+    set ring3_11 quadB_14$spectra
+    set ring3_12 quadB_15$spectra
+
+    set ring3_13 quadC_10$spectra
+    set ring3_14 quadC_11$spectra
+    set ring3_15 quadC_12$spectra
+    set ring3_16 quadC_13$spectra
+    set ring3_17 quadC_14$spectra
+    set ring3_18 quadC_15$spectra
+
+    set ring3_19 quadD_10$spectra
+    set ring3_20 quadD_11$spectra
+    set ring3_21 quadD_12$spectra
+    set ring3_22 quadD_13$spectra
+    set ring3_23 quadD_14$spectra
+    set ring3_24 quadD_15$spectra
+
+#-----end of Configuration of rings and channels-----#
+
+  set fd [open $fname w]
+  puts $fd "group tube\# spectrumname sum runtime= $runtime"
+
+  set event_quadA 0
+  set event_quadB 0
+  set event_quadC 0
+  set event_quadD 0
+
+  set event_ring1 0
+  set event_ring2 0
+  set event_ring3 0
+
+  set event_all 0
+
+#------quadA quadB quadC quadD------#
+  
+  foreach grouptemp {quadA quadB quadC quadD} { 
+    set event_quad 0
+    puts $fd ""
+    foreach num {1 2 3 4 5 6 7 8 9 10 11 12 13 14 15} {
+
+      set spectrum "[set $grouptemp$string_$num]"
+      set event_ch 0
+      set event_tube 0
+      for { set i 0 } { $i<4095+1 } {incr i } {
+        set event_ch [channel -get "$spectrum" "$i"]
+        set event_tube [expr $event_tube+$event_ch]
+      }
+      puts "$spectrum has detected $event_tube events"
+      puts $fd "$grouptemp $num $spectrum $event_tube"
+      set event_quad [expr $event_quad+$event_tube]
+    }
+ 
+
+    set event_$grouptemp $event_quad
+    set event_all [expr $event_all+$event_quad]  
+
+    puts ""
+    puts "$grouptemp$spectra has $event_quad counts"
+    puts ""
+  }
+
+
+
+#-------ring1---------#
+
+  set event_ring 0
+  puts $fd ""
+    foreach num {1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16} {
+
+      set spectrum "[set ring1_$num]"
+      set event_ch 0
+      set event_tube 0
+      for { set i 0 } { $i<4095+1 } {incr i } {
+        set event_ch [channel -get "$spectrum" "$i"]
+        set event_tube [expr $event_tube+$event_ch]
+      }
+      puts "ring1_$num has detected $event_tube events"
+      puts $fd "ring1 $num $spectrum $event_tube"
+      set event_ring [expr $event_ring+$event_tube]  
+    }
+
+  puts ""
+  puts "ring1$spectra has $event_ring counts"
+  set event_ring1 $event_ring
+
+
+#-------ring2---------#
+
+  set event_ring 0
+  puts $fd "" 
+    foreach num {1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20} {
+
+      set spectrum "[set ring2_$num]"
+      set event_ch 0
+      set event_tube 0
+      for { set i 0 } { $i<4095+1 } {incr i } {
+        set event_ch [channel -get "$spectrum" "$i"]
+        set event_tube [expr $event_tube+$event_ch]
+      }
+      puts "ring2_$num has detected $event_tube events"
+      puts $fd "ring2 $num $spectrum $event_tube"
+      set event_ring [expr $event_ring+$event_tube]  
+    }
+
+  puts ""
+  puts "ring2$spectra has $event_ring counts"
+  set event_ring2 $event_ring
+
+
+
+
+#-------ring3---------#
+
+  set event_ring 0
+  puts $fd "" 
+    foreach num {1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24} {
+
+      set spectrum "[set ring3_$num]"
+      set event_ch 0
+      set event_tube 0
+      for { set i 0 } { $i<4095+1 } {incr i } {
+        set event_ch [channel -get "$spectrum" "$i"]
+        set event_tube [expr $event_tube+$event_ch]
+      }
+      puts "ring3_$num has detected $event_tube events"
+      puts $fd "ring3 $num $spectrum $event_tube"
+      set event_ring [expr $event_ring+$event_tube]  
+    }
+
+  puts ""
+  puts "ring3$spectra has $event_ring counts"
+  set event_ring3 $event_ring
+
+
+
+
+
+
+
+
+
+  puts ""
+  puts "quadA$spectra has $event_quadA counts"
+  puts "quadB$spectra has $event_quadB counts"
+  puts "quadC$spectra has $event_quadC counts"
+  puts "quadD$spectra has $event_quadD counts"
+  puts "ring1$spectra has $event_ring1 counts"
+  puts "ring2$spectra has $event_ring2 counts"
+  puts "ring3$spectra has $event_ring3 counts"
+  puts "all$spectra has $event_all counts"
+  puts ""
+
+
+  puts $fd ""
+  puts $fd "quadA$spectra ALL $event_quadA counts"
+  puts $fd "quadB$spectra ALL $event_quadB counts"
+  puts $fd "quadC$spectra ALL $event_quadC counts"
+  puts $fd "quadD$spectra ALL $event_quadD counts"
+  puts $fd "ring1$spectra ALL $event_ring1 counts"
+  puts $fd "ring2$spectra ALL $event_ring2 counts"
+  puts $fd "ring3$spectra ALL $event_ring3 counts"
+  puts $fd "all$spectra ALL $event_all counts"
+   
+
+ 
+  puts "----------------"
+  puts "end of procedure"
+  puts ""  
+
+
+  flush $fd
+
+}

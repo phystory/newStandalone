@@ -1,0 +1,491 @@
+/*
+  File:  bdecayV.h
+  mod 15nov01 by pfm
+  mod 18nov02 by pfm for exp 01006
+  mod 2003/01/05 by ACM to start DSSD and SSSD strip numbering at 01 instead of 00
+  mod 20apr04 by BET for 03005:  added i2n variables
+  Actual construction of the variable tree structure
+  which has to be done only once
+  this file has to be edited in parallel with bdecayVariables_standalone.h
+  which contains the structure declarations
+  Mod 1Sep05 J.Pereira
+*/
+
+betadecaycalibrator bdecayv = {
+
+   /* Clock */  
+   {
+     // Calibration to put 10 seconds/16 bits on a 10-bit spectrum 
+     *(new CTreeVariable("bdecayv.clock.calib", 0.1952, "")),
+     // Number of clocks ticks per second 
+     *(new CTreeVariable("bdecayv.clock.scale", 32768, "")),
+     // Maximum correlation time allowed, in seconds 
+     *(new CTreeVariable("bdecayv.clock.max", 10, ""))
+   },   
+
+  /* PIN00 */
+   {
+     *(new CTreeVariable("bdecayv.pin00.slope", 1, "")),
+     *(new CTreeVariable("bdecayv.pin00.intercept", 0, "")),
+     *(new CTreeVariable("bdecayv.pin00.thresh", 0, ""))
+   },
+
+  /* PIN01 */
+   {
+     *(new CTreeVariable("bdecayv.pin01.slope", 1, "")),
+     *(new CTreeVariable("bdecayv.pin01.intercept", 0, "")),
+     *(new CTreeVariable("bdecayv.pin01.thresh", 0, ""))
+   },
+
+
+  /* PIN02 */
+  {
+    *(new CTreeVariable("bdecayv.pin02.slope", 1, "")),
+    *(new CTreeVariable("bdecayv.pin02.intercept", 0, "")),
+    *(new CTreeVariable("bdecayv.pin02.thresh", 0, ""))
+  },
+
+  /* PIN03 */
+  {
+    *(new CTreeVariable("bdecayv.pin03.slope", 1, "")),
+    *(new CTreeVariable("bdecayv.pin03.intercept", 0, "")),
+    *(new CTreeVariable("bdecayv.pin03.thresh", 0, ""))
+  },
+
+  /* PIN04 */
+  {
+    *(new CTreeVariable("bdecayv.pin04.slope", 1, "")),
+    *(new CTreeVariable("bdecayv.pin04.intercept", 0, "")),
+    *(new CTreeVariable("bdecayv.pin04.thresh", 0, ""))
+  },
+
+
+  /* N3 beamline scintillator */
+  {
+    *(new CTreeVariable("bdecayv.n3scint.slope", 1, "")),
+    *(new CTreeVariable("bdecayv.n3scint.intercept", 0, "")),
+    *(new CTreeVariable("bdecayv.n3scint.thresh", 0, ""))
+  },
+
+ /* DSSD front calib */
+  {
+    *(new CTreeVariableArray("bdecayv.front.hioffset", 0, "", 40, 1)),
+    *(new CTreeVariableArray("bdecayv.front.hislope", 1, "", 40, 1)),
+    *(new CTreeVariableArray("bdecayv.front.loslope", 1, "", 40, 1))
+  },
+
+  /* DSSD back calib */
+  {
+    *(new CTreeVariableArray("bdecayv.back.hioffset", 0, "", 40, 1)),
+    *(new CTreeVariableArray("bdecayv.back.hislope", 1, "", 40, 1)),
+    *(new CTreeVariableArray("bdecayv.back.loslope", 1, "", 40, 1))
+   },
+
+  /* DSSD front thresh */
+  {
+    *(new CTreeVariableArray("bdecayv.fthresh.hithresh", 0, "", 40, 1)),
+    *(new CTreeVariableArray("bdecayv.fthresh.lothresh", 0, "", 40, 1)),
+    *(new CTreeVariableArray("bdecayv.fthresh.duld", 4095, "", 40, 1))
+  },
+
+  /* DSSD back thresh */
+  {
+    *(new CTreeVariableArray("bdecayv.bthresh.hithresh", 0, "", 40, 1)),
+    *(new CTreeVariableArray("bdecayv.bthresh.lothresh", 0, "", 40, 1)),
+    *(new CTreeVariableArray("bdecayv.bthresh.duld", 4095, "", 40, 1))
+  },
+
+   /* Ge Crystal */
+   {
+     *(new CTreeVariable("bdecayv.ge.slope", 1, "")),
+     *(new CTreeVariable("bdecayv.ge.intercept", 0, "")),
+     *(new CTreeVariable("bdecayv.ge.thresh", 0, ""))
+   },
+   
+   /* SSSD1 settings */
+   {
+     *(new CTreeVariableArray("bdecayv.sssd1.hioffset", 0, "", 16, 1)),
+     *(new CTreeVariableArray("bdecayv.sssd1.hislope", 1, "", 16, 1)),
+     *(new CTreeVariableArray("bdecayv.sssd1.loslope", 1, "", 16, 1)),
+     *(new CTreeVariableArray("bdecayv.sssd1.hithresh", 0, "", 16, 1)),
+     *(new CTreeVariableArray("bdecayv.sssd1.lothresh", 0, "", 16, 1)),
+     *(new CTreeVariableArray("bdecayv.sssd1.uld", 4095, "", 16, 1))
+   },
+   
+   /* SEGA settings */
+   {
+     *(new CTreeVariableArray("bdecayv.sega.square", 0, "", 16, 1)), 
+     *(new CTreeVariableArray("bdecayv.sega.slope", 1, "", 16, 1)),
+     *(new CTreeVariableArray("bdecayv.sega.intercept", 0, "", 16, 1)),
+     *(new CTreeVariableArray("bdecayv.sega.thresh", 0, "", 16, 1))
+   },
+   
+   /* TAC corrections */
+   {
+     *(new CTreeVariable("bdecayv.tac.i2scorr", 0, "")),
+     *(new CTreeVariable("bdecayv.tac.i2ncorr", 0, ""))
+   },
+   
+   /* Hit flags */
+   {
+     *(new CTreeVariable("bdecayv.hit.pin00", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.pin01", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.pin02", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.pin03", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.pin04", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.n3scint", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.ge", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.fronthi", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.frontlo", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.backhi", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.backlo", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.sssd1hi", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.sssd1lo", 0, "")),
+     *(new CTreeVariable("bdecayv.hit.sega", 0, ""))
+   },
+   
+   /* Correlation flags */
+   {
+     *(new CTreeVariable("bdecayv.corr.reset", 1, "")),
+     *(new CTreeVariable("bdecayv.corr.minimplant", 10, ""))
+   },
+
+/* PID */
+   {
+     *(new CTreeVariable("bdecayv.pid.i2s_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.i2s_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.i2s_pos_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.i2s_pos_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.i2n_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.i2n_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.i2n_pos_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.i2n_pos_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.rf_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.rf_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.rf_pos_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.rf_pos_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.xfp_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.xfp_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.xfp_pos_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.xfp_pos_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de0_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.de0_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de0_tof_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de0_tof_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de1_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.de1_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de1_tof_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de1_tof_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de2_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.de2_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de2_tof_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de2_tof_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de3_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.de3_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de3_tof_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de3_tof_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de4_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.de4_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de4_tof_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.de4_tof_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.isum_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.isum_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.isum_tof_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.isum_tof_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.imax_scale", 1, "")),
+     *(new CTreeVariable("bdecayv.pid.imax_offset", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.imax_tof_corr", 0, "")),
+     *(new CTreeVariable("bdecayv.pid.imax_tof_offset", 0, ""))
+   },
+   
+   /* Temperature monitor */
+   {
+     *(new CTreeVariable("bdecayv.temp.clockcalib", 0.0001952, ""))
+   }
+   
+};
+
+
+struct detectorcalibrator nerov = {
+  /* Quadrant A */
+  {
+		*(new CTreeVariable("nerov.ecalib_quadA.0.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.0.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.1.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.1.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.2.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.2.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.3.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.3.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.4.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.4.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.5.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.5.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.6.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.6.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.7.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.7.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.8.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.8.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.9.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.9.gain", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.10.offset", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.10.gain", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.11.offset", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.11.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.12.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.12.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.13.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.13.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.14.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.14.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadA.15.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadA.15.gain", 1, "MeV/ch"))
+  },
+  /* Quadrant B */
+		    {                                  
+		*(new CTreeVariable("nerov.ecalib_quadB.0.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.0.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.1.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.1.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.2.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.2.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.3.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.3.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.4.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.4.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.5.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.5.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.6.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.6.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.7.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.7.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.8.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.8.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.9.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.9.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.10.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.10.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.11.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.11.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.12.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.12.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.13.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.13.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.14.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.14.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadB.15.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadB.15.gain", 1, "MeV/ch"))
+  },
+  /* Quadrant C */
+  {	
+                *(new CTreeVariable("nerov.ecalib_quadC.0.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.0.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.1.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.1.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.2.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.2.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.3.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.3.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.4.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.4.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.5.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.5.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.6.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.6.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.7.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.7.gain", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.8.offset", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.8.gain", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.9.offset", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.9.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.10.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.10.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.11.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.11.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.12.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.12.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.13.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.13.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.14.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.14.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadC.15.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadC.15.gain", 1, "MeV/ch"))
+  },
+
+  /*Quadrant D*/
+  {
+		*(new CTreeVariable("nerov.ecalib_quadD.0.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.0.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.1.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.1.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.2.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.2.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.3.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.3.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.4.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.4.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.5.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.5.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.6.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.6.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.7.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.7.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.8.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.8.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.9.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.9.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.10.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.10.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.11.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.11.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.12.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.12.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.13.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.13.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.14.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.14.gain", 1, "MeV/ch")),
+		*(new CTreeVariable("nerov.ecalib_quadD.15.offset", 0, "MeV")),
+		*(new CTreeVariable("nerov.ecalib_quadD.15.gain", 1, "MeV/ch"))
+  },
+/* Quadrant A time */
+  {
+                *(new CTreeVariable("nerov.tcalib_quadA.0.offset", 0, "ns")),
+                *(new CTreeVariable("nerov.tcalib_quadA.0.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.1.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.1.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.2.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.2.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.3.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.3.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.4.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.4.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.5.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.5.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.6.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.6.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.7.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.7.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.8.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.8.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.9.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.9.gain", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.10.offset", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.10.gain", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.11.offset", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.11.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.12.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.12.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.13.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.13.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.14.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.14.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadA.15.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadA.15.gain", 1, "ns/ch"))
+  },
+  /* Quadrant B time */
+  {
+                *(new CTreeVariable("nerov.tcalib_quadB.0.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.0.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.1.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.1.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.2.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.2.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.3.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.3.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.4.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.4.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.5.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.5.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.6.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.6.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.7.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.7.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.8.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.8.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.9.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.9.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.10.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.10.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.11.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.11.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.12.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.12.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.13.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.13.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.14.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.14.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadB.15.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadB.15.gain", 1, "ns/ch"))
+  },
+  /* Quadrant C time */
+  {
+                *(new CTreeVariable("nerov.tcalib_quadC.0.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.0.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.1.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.1.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.2.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.2.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.3.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.3.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.4.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.4.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.5.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.5.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.6.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.6.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.7.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.7.gain", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.8.offset", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.8.gain", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.9.offset", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.9.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.10.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.10.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.11.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.11.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.12.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.12.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.13.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.13.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.14.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.14.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadC.15.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadC.15.gain", 1, "ns/ch"))
+  },
+  /* Quadrant D time */
+  {
+		*(new CTreeVariable("nerov.tcalib_quadD.0.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.0.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.1.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.1.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.2.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.2.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.3.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.3.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.4.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.4.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.5.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.5.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.6.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.6.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.7.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.7.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.8.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.8.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.9.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.9.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.10.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.10.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.11.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.11.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.12.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.12.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.13.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.13.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.14.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.14.gain", 1, "ns/ch")),
+		*(new CTreeVariable("nerov.tcalib_quadD.15.offset", 0, "ns")),
+		*(new CTreeVariable("nerov.tcalib_quadD.15.gain", 1, "ns/ch"))
+  }
+};

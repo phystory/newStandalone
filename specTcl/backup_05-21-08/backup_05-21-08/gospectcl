@@ -1,0 +1,3 @@
+cd $HOME/production/spectcl3.0-gcc3.x/03016/src/bdecay_SpecTcl .
+./bdecay_SpecTcl 
+

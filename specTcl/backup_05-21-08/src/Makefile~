@@ -1,0 +1,51 @@
+############################################################################3
+# Makefile to create spectcl programs for experiments 03034 & 05028
+# version 3.0-gcc3.x
+# J.Pereira 8/29/2005
+############################################################################3
+//INSTDIR=/usr/opt/spectcl/3.0-gcc3.x
+INSTDIR=/usr/opt/spectcl/current
+include $(INSTDIR)/etc/SpecTcl_Makefile.include
+
+
+#  If you have any switches that need to be added to the default c++ compilation
+# rules, add them to the definition below:
+
+USERCXXFLAGS=
+
+#  If you have any switches you need to add to the default c compilation rules,
+#  add them to the defintion below:
+
+USERCCFLAGS=$(USERCXXFLAGS)
+
+#  If you have any switches you need to add to the link add them below:
+
+USERLDFLAGS= -ltk -ltcl -lSM -lICE
+
+#
+#   Append your objects to the definitions below:
+#
+
+OBJECTS=SpecTcl.o Unpacker.o \
+#  Calibrator.o Threshold.o Correlator.o
+
+#
+#  Finally the makefile targets.
+#
+
+
+SpecTcl: $(OBJECTS)
+	$(CXXLD)  -o  SpecTcl $(OBJECTS) $(USERLDFLAGS) \
+	$(LDFLAGS) 
+
+
+clean:
+	rm -f $(OBJECTS) SpecTcl
+
+depend:
+	makedepend $(USERCXXFLAGS) *.cpp *.c
+
+help:
+	echo "make                 - Build customized SpecTcl"
+	echo "make clean           - Remove objects from previous builds"
+	echo "make depend          - Add dependencies to the Makefile. "

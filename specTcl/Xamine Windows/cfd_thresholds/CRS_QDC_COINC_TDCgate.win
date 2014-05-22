@@ -1,0 +1,50 @@
+Geometry 4,2
+# /user/nerotest/Standalone/specTcl/Xamine Windows/cfd_thresholds/CRS_QDC_COINC_TDCgate.win Written by @(#)dispwind.cc	2.2 1/28/94  at Wed Sep 17 13:03:46 2008
+
+Window  0,0,"CRS_QDC_00_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,0,"CRS_QDC_00_ENERGY!QDC00"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  2,0,"CRS_QDC_00_ENERGY!QDC01"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,0,"CRS_QDC_00_ENERGY!TDC_ALL"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  0,1,"CRS_QDC_01_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,1,"CRS_QDC_01_ENERGY!QDC00"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  2,1,"CRS_QDC_01_ENERGY!QDC01"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,1,"CRS_QDC_01_ENERGY!TDC_ALL"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow

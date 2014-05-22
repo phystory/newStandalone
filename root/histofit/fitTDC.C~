@@ -1,0 +1,12 @@
+int fit() {
+
+
+  readsource("run249/TDC/quadA_2.dat",55367);
+  gPad->SetLogy(0); 
+  gPad->Modified();  
+
+
+
+
+
+}

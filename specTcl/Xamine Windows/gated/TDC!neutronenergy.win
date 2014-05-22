@@ -1,0 +1,52 @@
+Geometry 3,3
+# /user/nerotest/Standalone/specTcl/Xamine Windows/gated/TDC!neutronenergy.win Written by @(#)dispwind.cc	2.2 1/28/94  at Tue Jul 15 17:24:57 2008
+
+Window  0,0,"QUADATIME2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 0
+Endwindow
+Window  1,0,"QUADATIME2!QUADB_THRESHOLD"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 0
+Endwindow
+Window  2,0,"QUADATIME2!QUADC_THRESHOLD"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 0
+Endwindow
+Window  0,1,"QUADATIME2!QUADALL_THRESHOLD"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 0
+Endwindow
+Window  1,1,"QUADATIME2!QUADA_THRESHOLD"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 0
+Endwindow
+Window  2,1,"QUADATIME2!QUADD_THRESHOLD"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 0
+Endwindow
+Window  0,2,"QUADATIME2!QUADRING1_THRESHOLD"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 0
+Endwindow
+Window  1,2,"QUADATIME2!QUADRING2_THRESHOLD"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 0
+Endwindow
+Window  2,2,"QUADATIME2!QUADRING3_THRESHOLD"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 0
+Endwindow

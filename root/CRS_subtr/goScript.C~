@@ -1,0 +1,8 @@
+
+
+  .L ../root/CRS_subtr/backgr_corr.C
+  readsource("run283/CRS/CRS_QDC_00.dat",900);
+  readbackgr("run280/CRS/CRS_QDC_00.dat",900);
+  corr();
+  c1->SaveAs("PDF/run283-run280.pdf");
+

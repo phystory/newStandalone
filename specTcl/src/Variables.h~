@@ -1,0 +1,217 @@
+/*      File:  bdecayVariables.h
+        mod 13nov01 by pfm 
+        mod 18nov02 by pfm for 01006
+	mod 20apr04 by BET for 03005
+	Variable definitions for the betadecay
+	The root variable name is bdecayv
+	Author: D. Bazin
+	Date: July 2001
+	Mod 1Sep05 J.Pereira
+*/
+
+#ifndef __TREEVARIABLE_H
+#include <TreeParameter.h>
+#endif
+
+//#ifndef __BDECAYVARIABLES_H
+//#define __BDECAYVARIABLES_H
+//#ifndef __NEROVARIABLES_H
+//#define __NEROVARIABLES_H
+
+struct clockcalibrator
+{
+  CTreeVariable& calib;
+  CTreeVariable& scale;
+  CTreeVariable& max;
+};
+
+struct pincalibrator
+{
+  CTreeVariable& slope;
+  CTreeVariable& intercept;
+  CTreeVariable& thresh;
+};
+
+struct scintcalibrator
+{
+  CTreeVariable& slope;
+  CTreeVariable& intercept;
+  CTreeVariable& thresh;
+};
+
+struct dssdcalibrator
+{
+  CTreeVariableArray hioffset;
+  CTreeVariableArray hislope;
+  CTreeVariableArray loslope;
+};
+
+struct dssdthresh
+{
+  CTreeVariableArray hithresh;
+  CTreeVariableArray lothresh;
+  CTreeVariableArray duld;
+};
+
+struct germ
+{
+  CTreeVariable& slope;
+  CTreeVariable& intercept;
+  CTreeVariable& thresh;
+};
+
+struct sssdcalibrator
+{
+  CTreeVariableArray hioffset; /* ADC offset */
+  CTreeVariableArray hislope; /* calibration slope high gain */
+  CTreeVariableArray loslope; /* calibration slope low gain*/
+  CTreeVariableArray hithresh; /* lower level threshold */
+  CTreeVariableArray lothresh; /* lower level threshold */
+  CTreeVariableArray uld; /* upper level discriminator */
+};
+
+/* Temperature monitor */
+struct tempcalibrator
+{
+  CTreeVariable& clockcalib;
+};
+
+struct segacalibrator
+{
+  CTreeVariableArray square;
+  CTreeVariableArray slope;
+  CTreeVariableArray intercept;
+  CTreeVariableArray thresh;
+};
+
+struct taccalibrator
+{
+  CTreeVariable& i2scorr;
+  CTreeVariable& i2ncorr;
+};
+
+struct hitflag
+{
+  CTreeVariable& pin00;
+  CTreeVariable& pin01;
+  CTreeVariable& pin02;
+  CTreeVariable& pin03;
+  CTreeVariable& pin04;
+  CTreeVariable& n3scint;
+  CTreeVariable& ge;
+  CTreeVariable& fronthi;
+  CTreeVariable& frontlo;
+  CTreeVariable& backhi;
+  CTreeVariable& backlo;
+  CTreeVariable& sssd1hi;
+  CTreeVariable& sssd1lo;
+  CTreeVariable& sega;
+};
+
+struct correlation
+{
+  CTreeVariable& reset;
+  CTreeVariable& minimplant;
+};
+
+/* PID */
+struct pidcalibrator
+{
+  CTreeVariable& i2s_scale;
+  CTreeVariable& i2s_offset;
+  CTreeVariable& i2s_pos_corr;
+  CTreeVariable& i2s_pos_offset;
+  CTreeVariable& i2n_scale;
+  CTreeVariable& i2n_offset;
+  CTreeVariable& i2n_pos_corr;
+  CTreeVariable& i2n_pos_offset;
+  CTreeVariable& rf_scale;
+  CTreeVariable& rf_offset;
+  CTreeVariable& rf_pos_corr;
+  CTreeVariable& rf_pos_offset;
+  CTreeVariable& xfp_scale;
+  CTreeVariable& xfp_offset;
+  CTreeVariable& xfp_pos_corr;
+  CTreeVariable& xfp_pos_offset;
+  CTreeVariable& de0_scale;
+  CTreeVariable& de0_offset;
+  CTreeVariable& de0_tof_corr;
+  CTreeVariable& de0_tof_offset;
+  CTreeVariable& de1_scale;
+  CTreeVariable& de1_offset;
+  CTreeVariable& de1_tof_corr;
+  CTreeVariable& de1_tof_offset;
+  CTreeVariable& de2_scale;
+  CTreeVariable& de2_offset;
+  CTreeVariable& de2_tof_corr;
+  CTreeVariable& de2_tof_offset;
+  CTreeVariable& de3_scale;
+  CTreeVariable& de3_offset;
+  CTreeVariable& de3_tof_corr;
+  CTreeVariable& de3_tof_offset;
+  CTreeVariable& de4_scale;
+  CTreeVariable& de4_offset;
+  CTreeVariable& de4_tof_corr;
+  CTreeVariable& de4_tof_offset;
+  CTreeVariable& isum_scale;
+  CTreeVariable& isum_offset;
+  CTreeVariable& isum_tof_corr;
+  CTreeVariable& isum_tof_offset;
+  CTreeVariable& imax_scale;
+  CTreeVariable& imax_offset;
+  CTreeVariable& imax_tof_corr;
+  CTreeVariable& imax_tof_offset;
+};
+
+// NERO //
+
+struct chcalibrator
+{
+	CTreeVariable& offset;
+	CTreeVariable& gain;
+};
+
+/* The entire beta decay setup */
+struct betadecaycalibrator
+{
+  struct clockcalibrator clock;
+  struct pincalibrator pin00;
+  struct pincalibrator pin01;
+  struct pincalibrator pin02;
+  struct pincalibrator pin03;
+  struct pincalibrator pin04;
+  struct scintcalibrator n3scint;
+  struct dssdcalibrator front;
+  struct dssdcalibrator back;
+  struct dssdthresh fthresh;
+  struct dssdthresh bthresh;
+  struct germ ge;
+  struct sssdcalibrator sssd1;
+  struct segacalibrator sega;
+  struct taccalibrator tac;
+  struct hitflag hit;
+  struct correlation corr;
+  struct pidcalibrator pid;
+  struct tempcalibrator temp;
+};
+
+/* The NERO setup */
+
+struct detectorcalibrator
+{
+	struct chcalibrator ecalib_quadA[16];
+        struct chcalibrator ecalib_quadB[16];
+        struct chcalibrator ecalib_quadC[16];
+        struct chcalibrator ecalib_quadD[16];
+        struct chcalibrator tcalib_quadA[16];
+        struct chcalibrator tcalib_quadB[16];
+        struct chcalibrator tcalib_quadC[16];
+        struct chcalibrator tcalib_quadD[16];
+};
+
+/* following the declarations, this is the actual construction
+    of the variable tree structure defined in bdecayV.h */
+extern struct betadecaycalibrator bdecayv;
+extern struct detectorcalibrator nerov;
+
+//#endif

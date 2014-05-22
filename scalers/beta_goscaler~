@@ -1,0 +1,4 @@
+cd $HOME/production/testfolder/scaler
+export DAQHOST=spdaq26
+ScalerDisplay beta_scaler.tab
+

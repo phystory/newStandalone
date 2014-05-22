@@ -1,0 +1,71 @@
+  double offset=0;
+  double offseterror=0;
+  TH1F *hsource_corr;
+  TH1F *hsource_corr_norm;
+  TH1F *hmod_time;
+
+
+  int cutoff=1999;
+  TString expfit_formula="[0]+[1]*exp((x)/[2])";
+  TF1* expfit = new TF1("expfit",expfit_formula);
+  expfit->SetLineColor(2);
+
+  TString simfit_formula="1/559.70068*exp(-x/559.70068)";
+  TF1* simfit = new TF1("simfit",simfit_formula,0,cutoff);
+  simfit->SetLineColor(2);
+
+int fit260() {
+
+//----read and draw spectrum----//
+  readsource("run259/TDC/quadA_2.dat",60627);
+  gPad->SetLogy(0); 
+  gPad->Modified();
+
+//----fit exponential function----//
+  expfit->SetParameter(0,003);
+  expfit->SetParameter(1,05);
+  expfit->SetParameter(2,-100);
+  expfit->SetLineColor(2);
+  hsource->Fit("expfit","","",hsource->GetMaximumBin(),1999);
+
+  offset=expfit->GetParameter(0);
+  offseterror=expfit->GetParError(0);
+
+//----draw line of exponential offset as background----//
+  TF1* offsetline = new TF1("offsetline","[0]",0,4095);
+  offsetline->SetParameter(0,offset);
+  offsetline->SetLineColor(3);
+  offsetline->Draw("same");
+
+  //----fill background histogram with offset value and error----//
+  hbackgr->Reset();
+  for(int i=0;i<cutoff;i++){
+    hbackgr->SetBinContent(i,offset);
+    hbackgr->SetBinError(i,offseterror);
+    }
+
+//----subtract background from source histogram----//
+  hsource_corr = new TH1F("hsource_corr","hsource_corr",4096,0,4096);
+  (*hsource_corr) = (*hsource) - (*hbackgr);
+
+}
+
+
+
+int normalize260(){
+  hsource_corr_norm = new TH1F("hsource_corr_norm","hsource_corr_norm",4096,0,4096);
+
+  for(int i=hsource_corr->GetMaximumBin();i<cutoff+1;i++){
+    hsource_corr_norm->SetBinContent(i-hsource_corr->GetMaximumBin(),hsource_corr->GetBinContent(i)/hsource_corr->Integral(hsource_corr->GetMaximumBin(),cutoff));
+    }
+
+  // hsource_corr_norm->Fit("expfit","","",0,1999-hsource_corr->GetMaximumBin());
+
+  
+  hmod_time = new TH1F("hmod_time","hmod_time",4096,0,4096);
+
+    for(int i=hsource_corr->GetMaximumBin();i<cutoff;i++){
+      
+    }
+
+}

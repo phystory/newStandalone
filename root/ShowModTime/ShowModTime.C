@@ -1,0 +1,184 @@
+
+#include <fstream>
+#include <iostream>
+
+using namespace std;
+
+  TH1F *hhisto;
+
+int readhisto(char* pFilename, int runsec) {
+  
+  char temp[900];
+  TString title, xtitle, ytitle;
+  TString xsizeS, ysizeS, specType;
+  const char *tempchar;
+  int xsize,ysize;
+  float SpecTclVersion;
+  int xch, ych;
+  float value;
+  char ch0;
+  Int_t i=1;
+  int exitflag=0;
+  int specnum=0;
+
+  int binwidth=64;
+
+
+  // open the file
+  ifstream file(pFilename, ios::in);
+  
+  file.getline(temp,900);
+  while (exitflag == 0) {
+    title = "";
+    xtitle = "";
+    ytitle = "";
+    xsizeS = "";
+    ysizeS = "";
+    i=1;
+
+    // unpacking the header 
+
+    while (temp[i]!='"'){
+      if (temp[i]=='-' || temp[i]=='.') {title += '_';
+      i++;
+      } else {title += temp[i]; 
+      i++;
+     }
+    }
+
+    i+=3;
+    while (temp[i]!=' ' && temp[i]!=')'){xsizeS+=temp[i];i++;}
+    if (temp[i]==' '){i++;
+    while (temp[i]!=')'){ysizeS+=temp[i]; i++;}
+    }
+    tempchar = xsizeS;
+    xsize = atoi(tempchar);
+    tempchar = ysizeS;
+    ysize = atoi(tempchar);    
+    file.getline(temp,900);
+    file >> SpecTclVersion;
+    file.getline(temp,900);
+    file >>  specType;
+    file.getline(temp,900);
+    file.getline(temp,900);
+    i=2;
+    while (temp[i]!='"'){xtitle += temp[i];i++;}
+    i++;
+    if (temp[i]==' '){i+=2;
+      while (temp[i]!='"'){ytitle+=temp[i];i++;}
+    }
+    cout << "--------------------------------------------" << endl;
+    cout << title << " "  << xsize << " " <<ysize << endl;
+    cout << "SpecTcl Version " << SpecTclVersion ;
+    cout << " Spectrum type " << specType << endl;
+    cout << xtitle << " " << ytitle << endl;
+    file.getline(temp,900);
+    cout << temp << endl;
+    file.getline(temp,900);
+    cout << temp << endl;
+
+    cout << "end of reading header" << endl;
+    
+
+
+    // here is where I define the spectrum based on 
+       // the info in the header
+
+
+      hhisto = new TH1F(title,title,int(xsize/binwidth),0,xsize-1);
+      hhisto->GetXaxis()->SetTitle(xtitle);
+      hhisto->SetTitle("Run with source");    
+    
+    
+    xch =0;
+
+
+    // here is where we fill the histogram
+
+    while(xch != -1) {
+      if (specType=="1" || specType=="g1") {
+    	file >> ch0 >> xch >> ch0 >> value;
+	hhisto->Fill(xch,value/runsec);
+	//	hhisto->SetBinError(xch,sqrt(hhisto->GetBinContent(xch))/runsec);
+      } else {
+	file >> ch0 >> xch >> ch0 >> value;
+      }
+    }
+    file.getline(temp,900);
+    file.getline(temp,900);
+    int length = strlen(temp);
+    if (length < 1) {exitflag=1;} 
+  }
+  file.close();
+
+  for (i=1;i<4096/binwidth;i++){
+    hhisto->SetBinError(i,sqrt(hhisto->GetBinContent(i)));
+  }
+
+  //Draw histogram.
+
+  hhisto->Draw();
+
+}
+
+
+
+
+
+int showrun(TString runname){
+
+  TString path_time = "/ModTime/quadAtime2.dat";
+  TString path_time!quadA_threshold = "/ModTime/quadAtime2!quadA_threshold.dat";
+  TString path_time!quadB_threshold = "/ModTime/quadAtime2!quadB_threshold.dat";
+  TString path_time!quadC_threshold = "/ModTime/quadAtime2!quadC_threshold.dat";
+  TString path_time!quadD_threshold = "/ModTime/quadAtime2!quadD_threshold.dat";
+  TString path_time!quadALL_threshold = "/ModTime/quadAtime2!quadALL_threshold.dat";
+  TString path_time!quadRing1_threshold = "/ModTime/quadAtime2!quadRing1_threshold.dat";
+  TString path_time!quadRing2_threshold = "/ModTime/quadAtime2!quadRing1_threshold.dat";
+  TString path_time!quadRing3_threshold = "/ModTime/quadAtime2!quadRing1_threshold.dat";
+
+
+
+  TCanvas* c1 = new TCanvas("c1","c1",800,600);
+  c1->Divide(1,2);
+
+  TPaveText *textbox = new TPaveText(0.75,0.35,0.85,0.45, "NDC");
+  textbox->AddText(runname);
+
+  c1->cd(1);
+  path = runname+path_time;
+  readhisto(path,1);
+  //  gPad->SetLogy(0);
+  //  gPad->Modified();
+
+  textbox->Draw("same");
+
+  c1->cd(2);
+  path = runname+path_time!quadALL_threshold;
+  readhisto(path,1);
+  //  gPad->SetLogy(0);
+  //  gPad->Modified();
+
+
+
+
+  // save canvas as jpg //
+  path = runname+" - ModTime_gated.jpg";
+  c1->SaveAs(path);
+
+}
+
+
+int Fit(){
+
+  
+  TString expfit_formula="[0]+[1]*exp((x)/[2])";
+  TF1* expfit = new TF1("expfit",expfit_formula);
+  expfit->SetLineColor(2);
+  expfit->SetParameter(0,2);
+  expfit->SetParameter(1,15);
+  expfit->SetParameter(2,-100);
+  expfit->SetLineColor(2);
+  hhisto->Fit("expfit","","",200,1800);
+
+}

@@ -1,0 +1,33 @@
+# Gate definitions
+gate _decay.xy.center c {bdecay.back.dmaxch bdecay.front.dmaxch {{19.000000 19.000000} {19.000000 23.000000} {23.000000 23.000000} {23.000000 19.000000}}}
+gate _decay.xy.lowleft c {bdecay.back.dmaxch bdecay.front.dmaxch {{7.000000 7.000000} {7.000000 11.000000} {11.000000 11.000000} {11.000000 7.000000}}}
+gate _decay.xy.right c {bdecay.back.dmaxch bdecay.front.dmaxch {{37.000000 19.000000} {41.000000 19.000000} {41.000000 23.000000} {37.000000 23.000000}}}
+gate _decay.xy.top c {bdecay.back.dmaxch bdecay.front.dmaxch {{19.000000 37.000000} {23.000000 37.000000} {23.000000 41.000000} {19.000000 41.000000}}}
+gate _dssd.and.sssd1 s {bdecay.bit.calhitmask {7.000000 7.000000}}
+gate _dssd.and.sssd2 s {bdecay.bit.calhitmask {11.000000 11.000000}}
+gate _dssd.back.m1 s {bdecay.back.dmult {1.000000 1.000000}}
+gate _dssd.back.m2 s {bdecay.back.dmult {2.000000 2.000000}}
+gate _dssd.front.and.back s {bdecay.bit.calhitmask {3.000000 3.000000}}
+gate _dssd.front.m1 s {bdecay.front.dmult {1.000000 1.000000}}
+gate _dssd.front.m2 s {bdecay.front.dmult {2.000000 2.000000}}
+gate _dssd.sssd1.and.sssd2 s {bdecay.bit.calhitmask {15.000000 15.000000}}
+gate _front.dmult.1 s {bdecay.front.dmult {1.000000 1.000000}}
+gate _prompt F {}
+gate _sssd1.m1 s {bdecay.sssd1.mult {1.000000 1.000000}}
+gate _sssd1.m2 s {bdecay.sssd1.mult {2.000000 2.000000}}
+gate _sssd1.mult.1 s {bdecay.sssd1.mult {1.000000 1.000000}}
+gate _sssd2.m1 s {bdecay.sssd1.mult {1.000000 1.000000}}
+gate _sssd2.m2 s {bdecay.sssd1.mult {2.000000 2.000000}}
+gate _sssd2.mult.1 s {bdecay.sssd2.mult {1.000000 1.000000}}
+gate impbottom c {bdecay.back.imaxch bdecay.front.imaxch {{18.000000 1.000000} {18.000000 7.000000} {24.000000 7.000000} {24.000000 1.000000}}}
+gate impcenter c {bdecay.back.imaxch bdecay.front.imaxch {{19.000000 24.000000} {25.000000 24.000000} {25.000000 19.000000} {19.000000 19.000000}}}
+gate impcenterpix c {bdecay.back.imaxch bdecay.front.imaxch {{21.000000 21.000000} {21.000000 22.000000} {22.000000 22.000000} {22.000000 21.000000}}}
+gate impright c {bdecay.back.imaxch bdecay.front.imaxch {{35.000000 27.000000} {41.000000 27.000000} {41.000000 21.000000} {35.000000 21.000000}}}
+# Apply definitions
+# TreeParameter changes from C++ code
+# TreeVariable changes from C++ code
+treevariable -set bdecayv.corr.reset 0 
+# Parameter page
+set parameter(Array) 0
+# Variable page
+set variable(Array) 0

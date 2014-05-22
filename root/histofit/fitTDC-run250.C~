@@ -1,0 +1,93 @@
+  int maxbin=-1;
+  Double_t tempbin=0;
+  Double_t all_n=0;
+
+
+int fit() {
+
+  readsource("run250/TDC/quadA_2.dat",255128);
+
+  maxbin=hsource->GetMaximumBin();
+
+  gPad->SetLogy(0); 
+  gPad->Modified();  
+
+  TString formula1="[0]+[1]*exp(x/[2])";
+
+  TF1* f1 = new TF1("f1",formula1);
+  f1->SetParameter(0,05);
+  f1->SetParameter(1,05);
+  f1->SetParameter(2,maxbin/2);
+  f1->SetLineColor(2);
+
+  hsource->Fit("f1","","",1500,maxbin);
+  f1->GetParameter(0);
+
+
+  TString formula2="[0]+[1]*x";
+
+  TF1* f2 = new TF1("f2",formula2);
+  f2->SetParameter(0,05);
+  f2->SetParameter(1,05);
+  f2->SetLineColor(2);
+
+  hsource->Fit("f2","","",1988,2015);
+
+
+  TF1* f3 = new TF1("f3","3.27064e-03",0,3000);
+  f3->SetLineColor(3);
+  //  f3->Draw("same");
+
+
+  tempbin= (f1->GetParameter(0) - f2->GetParameter(0)) /  f2->GetParameter(1);
+
+
+  cout << "bin number of edge (by lin fit) = " << tempbin << endl;
+
+  all_n = f1->Integral(0,int(tempbin+0.5)) - f1->GetParameter(0)*int(tempbin);
+
+  cout << "number of all det. neutrons = " << all_n << endl;
+
+
+  
+
+
+
+  TPaveText *pt = new TPaveText(0.55,0.75,0.85,0.85, "NDC");
+  pt->AddText("run250 - source in NERO (holder).");
+  pt->AddText("bottom paddle at end of NERO, closing the beamline");
+  pt->AddText("using only one paddle (bottom)");
+
+  pt->Draw();
+
+
+}
+
+
+
+
+int modtime() {
+
+
+  cout << "start" << endl;
+
+
+
+
+
+  //  TString formula4= "1*x+1*exp(x/1)";
+
+  //  TString formula4= "(2012-x)*0.00535268 + 0.000181155*357.130*exp((2012-x)/357.130))";
+
+  //  TF1* f4 = new TF1("f4",formula4,0,100);
+  //  f4->SetLineColor(1);
+  //  f4->Draw();
+
+  for (int i=0, i<1000, i=i+100) {
+
+    cout << "start" << endl;
+
+  }
+
+
+}

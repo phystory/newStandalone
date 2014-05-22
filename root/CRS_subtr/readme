@@ -1,0 +1,8 @@
+Readme to root script backgr_corr.C
+
+
+readbackgr(filename, runtime in sec)  -> reads background data in histogram hbackgr
+
+readsource(filename, runtime in sec)  -> reads source run data in histogram hsource
+
+corr()  -> new histogram hcorr = hsource - hbackgr   and produces output

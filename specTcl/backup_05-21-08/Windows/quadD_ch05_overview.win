@@ -1,0 +1,32 @@
+Geometry 1,4
+# /user/nerotest/Standalone/specTcl/Windows/quadD_ch05_overview.win Written by @(#)dispwind.cc	2.2 1/28/94  at Wed Mar 19 15:40:46 2008
+
+Window  0,0,"QUADD_5"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  0,1,"QUADDTIME5"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+   Expanded 0,1016
+Endwindow
+Window  0,2,"QUADD_5!TDC"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  0,3,"QUADD_5!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 1
+   Expanded 0,1200
+Endwindow

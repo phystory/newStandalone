@@ -1,0 +1,48 @@
+SpecTcl programs for BCS-standalone version
+J.Pereira 9/1/2005
+
+============================================================================
+The source code is on directory /src/
+
+Files:
+bdecaySpectcl_standalone     ->	Creates the CBDecaySpecTcl-type object myApp
+			       	which contains important semi "black-box" 
+			       	functions and the objects corresponding to 
+			       	the different event-processors
+
+bdecayUnpacker_standalone    -> Creates the "unpacking" event-processor object
+bdecayCalibrator_standalone  -> Creates the "calibrator" ev-proc object
+bdecayThereshold_standalone  -> Creates the "threshold" ev-proc object
+bdecayCorrelator_standalone  -> Creates the "correlator" ev-proc object
+bdecayParameters_standalone  -> Declares and contructs the parameter 
+			        tree structure
+bdecayP_standalone           -> Defines the parameter tree structure
+bdecayVariables_standalone   -> Declares and contructs the variable 
+			       	tree structure
+bdecayV_standalone           -> Defines the variable tree structure
+
+============================================================================
+Tcl scripts:
+
+SpecTclRC.tcl                -> Setup the standard scripted commands in
+			       	SpecTcl and invokes script SpecTclInit.tcl.
+				It also defines the Xamine dialoge menu
+
+SpecTclInit.tcl		     -> Sets "tree" variables and parameters to
+			       	desired values. It also calls other important
+			       	scripts like utils, DSSDInit, 
+				bdecay_spectra_standalone and 
+				bdecaygates_standalone 
+
+utils.tcl		     -> Script invoked by SpecTclInit that includes
+				useful commands
+
+DSSDInit.tcl		     ->	Sets the tree variables and parameters of the
+				DSSD detector
+
+bdecayspectra_standalone.tcl -> Defines the spectra list to display the 
+				parameters
+bdecaygates_standalone.tcl   ->	Defines the gates used with the parameters
+============================================================================
+Directory Windows contains the definition of the windows with different
+spectra

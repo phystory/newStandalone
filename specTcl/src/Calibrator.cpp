@@ -1,0 +1,342 @@
+/*************************************************************************** 
+   COMPACT SpecTcl . BCS Standalone version for experiments 03034 & 05028
+   Eventprocessor --> CALIBRATOR
+   
+   J.Pereira. Last version 8/31/2005
+***************************************************************************/
+
+#include <config.h>
+#ifdef HAVE_STD_NAMESPACE
+using namespace std;
+#endif
+#include <EventProcessor.h>
+#include <TCLAnalyzer.h>
+#include <Event.h> 
+#include <math.h> 
+
+#include "Parameters.h"
+#include "Variables.h"
+
+#include "Calibrator.h"
+
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+// new includes for gate access
+#include <Globals.h>
+#include <Histogrammer.h>
+#include <GateContainer.h>
+#include <Contour.h>
+
+
+Bool_t
+CBDecayCalibrator::operator()(const Address_t pEvent,
+				CEvent&         rEvent,
+				CAnalyzer&      rAnalyzer,
+				CBufferDecoder& rDecoder)
+{
+
+  int i,j,k,kk,l;
+
+  //cout << "Begin BCS Calibrator" <<endl;
+  //printf("Begin BCS Calibrator\n");
+
+ /* Clock */
+  
+  //bdecay.clock.current = (bdecay.clock.fast + (bdecay.clock.slow<<16));
+  if ( rEvent[bdecay.clock.fast.getId()].isValid() && rEvent[bdecay.clock.slow.getId()].isValid() ) 
+    {
+      bdecay.clock.current = (bdecay.clock.fast + 65536*bdecay.clock.slow);
+      /* Determine calibrated time for temperature monitor */
+      bdecay.temp.clock = (long)(bdecay.clock.current*bdecayv.temp.clockcalib);
+    }
+  
+  //bdecay.clock.current = (bdecay.clock.fast + 65536*bdecay.clock.slow);
+  //bdecay.clock.csiscurrent = (bdecay.clock.csis1 + 65536*bdecay.clock.csis2);
+  
+  /* PIN 0, 1, 2, 3, 4 and N3 Scint. */
+  if(((word)bdecay.bit.betabit1 & 0xFFF) != 0)
+    {
+      /* Assign specific ADC channels */
+      
+      /* Pin00 */
+      if ( rEvent[bdecay.adc.adc08[3].getId()].isValid() ) {
+	bdecay.pin00.energy = bdecay.adc.adc08[3] + 0.0;
+	bdecay.pin00.ecal = (bdecayv.pin00.slope*bdecay.pin00.energy + bdecayv.pin00.intercept);
+      }
+      /* Pin01 */
+      if ( rEvent[bdecay.adc.adc08[4].getId()].isValid() ) {
+	bdecay.pin01.energy = bdecay.adc.adc08[4] + 0.0;
+	bdecay.pin01.ecal = (bdecayv.pin01.slope*bdecay.pin01.energy + bdecayv.pin01.intercept);
+      }
+      /* Pin02 */
+      if ( rEvent[bdecay.adc.adc08[5].getId()].isValid() ) { 
+	bdecay.pin02.energy    = bdecay.adc.adc08[5] + 0.0;
+	bdecay.pin02.ecal = (bdecayv.pin02.slope*bdecay.pin02.energy + bdecayv.pin02.intercept);
+      }   
+      /* Pin03 */
+      if ( rEvent[bdecay.adc.adc08[6].getId()].isValid() ) {
+	bdecay.pin03.energy    = bdecay.adc.adc08[6] + 0.0;
+	bdecay.pin03.ecal = (bdecayv.pin03.slope*bdecay.pin03.energy + bdecayv.pin03.intercept);
+      }
+      /* Pin04 */
+      if ( rEvent[bdecay.adc.adc08[7].getId()].isValid() ) {
+	bdecay.pin04.energy    = bdecay.adc.adc08[7] + 0.0;
+	bdecay.pin04.ecal = (bdecayv.pin04.slope*bdecay.pin04.energy + bdecayv.pin04.intercept);
+      }
+      /* N3 beamline scintillator */
+      if ( rEvent[bdecay.adc.adc08[8].getId()].isValid() ) {
+	bdecay.n3scint.energy  = bdecay.adc.adc08[8] + 0.0;
+	bdecay.n3scint.ecal = (bdecayv.n3scint.slope*bdecay.n3scint.energy + bdecayv.n3scint.intercept);
+      }
+      /* i2pos TAC */
+      if ( rEvent[bdecay.adc.adc08[9].getId()].isValid() ) {
+	bdecay.tac.i2pos       = bdecay.adc.adc08[9] + 0.0;
+      }
+      /* Correct time-of-flights for image 2 position */
+      if ( rEvent[bdecay.adc.adc08[10].getId()].isValid() ) {
+	bdecay.tac.i2stof      = bdecay.adc.adc08[10] + 0.0;
+	bdecay.tac.i2scorr = bdecay.tac.i2stof + bdecayv.tac.i2scorr * bdecay.tac.i2pos;
+      }
+      if ( rEvent[bdecay.adc.adc08[11].getId()].isValid() ) {
+	bdecay.tac.i2ntof      = bdecay.adc.adc08[11] + 0.0;
+	bdecay.tac.i2ncorr = bdecay.tac.i2ntof + bdecayv.tac.i2ncorr * bdecay.tac.i2pos;
+      }
+      /* Ge detector */
+      if ( rEvent[bdecay.adc.adc08[12].getId()].isValid() ) {
+	bdecay.ge.energy       = bdecay.adc.adc08[12] + 0.0;
+	bdecay.ge.ecal = (bdecayv.ge.slope * bdecay.ge.energy + bdecayv.ge.intercept);
+      }
+      /* RF TAC */
+      if ( rEvent[bdecay.adc.adc08[13].getId()].isValid() ) {
+	bdecay.tac.rf       = bdecay.adc.adc08[13] + 0.0; 
+      }
+      /* Ge TAC */
+      if ( rEvent[bdecay.adc.adc08[14].getId()].isValid() ) {
+	bdecay.tac.ge       = bdecay.adc.adc08[14] + 0.0;
+      }
+
+
+     
+      /* Assign specific TDC channels */
+
+      if ( rEvent[bdecay.tdc.tdc01[0].getId()].isValid() ) bdecay.pin01.time   = bdecay.tdc.tdc01[0] + 0.0;
+      if ( rEvent[bdecay.tdc.tdc01[1].getId()].isValid() ) bdecay.pin02.time   = bdecay.tdc.tdc01[1] + 0.0;
+      if ( rEvent[bdecay.tdc.tdc01[2].getId()].isValid() ) bdecay.pin03.time   = bdecay.tdc.tdc01[2] + 0.0;
+      if ( rEvent[bdecay.tdc.tdc01[3].getId()].isValid() ) bdecay.pin04.time   = bdecay.tdc.tdc01[3] + 0.0;
+      if ( rEvent[bdecay.tdc.tdc01[4].getId()].isValid() ) bdecay.n3scint.time = bdecay.tdc.tdc01[4] + 0.0;
+      if ( rEvent[bdecay.tdc.tdc01[5].getId()].isValid() ) bdecay.i2s.time     = bdecay.tdc.tdc01[5] + 0.0;
+      if ( rEvent[bdecay.tdc.tdc01[6].getId()].isValid() ) bdecay.i2n.time     = bdecay.tdc.tdc01[6] + 0.0;
+      if ( rEvent[bdecay.tdc.tdc01[7].getId()].isValid() ) bdecay.ge.time      = bdecay.tdc.tdc01[7] + 0.0;
+      if ( rEvent[bdecay.tdc.tdc01[8].getId()].isValid() ) bdecay.rf.time      = bdecay.tdc.tdc01[8] + 0.0;
+      if ( rEvent[bdecay.tdc.tdc01[9].getId()].isValid() ) bdecay.pin00.time   = bdecay.tdc.tdc01[9] + 0.0;
+      
+      /* PID correction for ToF and I2 position */
+      if ( rEvent[bdecay.tac.i2ntof.getId()].isValid() &&  rEvent[bdecay.tac.i2pos.getId()].isValid() )
+	bdecay.pid.i2ntof = bdecayv.pid.i2n_scale *
+	  (bdecay.tac.i2ntof + bdecayv.pid.i2n_pos_corr *
+	   (bdecay.tac.i2pos - bdecayv.pid.i2n_pos_offset)) -
+	  bdecayv.pid.i2n_offset;      
+      if ( rEvent[bdecay.pin00.ecal.getId()].isValid() &&  rEvent[bdecay.tac.i2ntof.getId()].isValid() )
+	bdecay.pid.de0 = bdecayv.pid.de0_scale *
+	  (bdecay.pin00.ecal + bdecayv.pid.de0_tof_corr *
+	   (bdecay.tac.i2ntof - bdecayv.pid.de0_tof_offset)) - 
+	  bdecayv.pid.de0_offset;
+      if ( rEvent[bdecay.pin01.ecal.getId()].isValid() &&  rEvent[bdecay.tac.i2ntof.getId()].isValid() )
+	bdecay.pid.de1 = bdecayv.pid.de1_scale *
+	  (bdecay.pin01.ecal + bdecayv.pid.de1_tof_corr *
+	   (bdecay.tac.i2ntof - bdecayv.pid.de1_tof_offset)) - 
+	  bdecayv.pid.de1_offset;
+      if ( rEvent[bdecay.pin02.ecal.getId()].isValid() &&  rEvent[bdecay.tac.i2ntof.getId()].isValid() )
+	bdecay.pid.de2 = bdecayv.pid.de2_scale *
+	  (bdecay.pin02.ecal + bdecayv.pid.de2_tof_corr *
+	   (bdecay.tac.i2ntof - bdecayv.pid.de2_tof_offset)) - 
+	  bdecayv.pid.de2_offset;
+      if ( rEvent[bdecay.pin03.ecal.getId()].isValid() &&  rEvent[bdecay.tac.i2ntof.getId()].isValid() )
+	bdecay.pid.de3 = bdecayv.pid.de3_scale *
+	  (bdecay.pin03.ecal + bdecayv.pid.de3_tof_corr *
+	   (bdecay.tac.i2ntof - bdecayv.pid.de3_tof_offset)) - 
+	  bdecayv.pid.de3_offset;
+      if ( rEvent[bdecay.pin04.ecal.getId()].isValid() &&  rEvent[bdecay.tac.i2ntof.getId()].isValid() )
+	bdecay.pid.de4 = bdecayv.pid.de4_scale *
+	  (bdecay.pin04.ecal + bdecayv.pid.de4_tof_corr *
+	   (bdecay.tac.i2ntof - bdecayv.pid.de4_tof_offset)) - 
+ 	bdecayv.pid.de2_offset;
+    }
+
+  
+
+  /* DSSD front 1-16 High and low */
+  if(((word)bdecay.bit.betabit1&0x1) != 0) 
+    { 
+      for (i=0;i<16;i++) 
+	{ 
+	  j=i+16;
+	  k=i+1;	  
+	  if ( rEvent[bdecay.adc.adc01[i].getId()].isValid() ) {
+	    bdecay.front.hienergy[k] = bdecay.adc.adc01[i] + 0.0;
+	    bdecay.front.hiecal[k] = (bdecayv.front.hislope[k]*(bdecay.front.hienergy[k] - bdecayv.front.hioffset[k]));
+	  }
+	  if ( rEvent[bdecay.adc.adc01[j].getId()].isValid() ) {
+	    bdecay.front.loenergy[k] = bdecay.adc.adc01[j] + 0.0;
+	  bdecay.front.loecal[k] = (bdecayv.front.loslope[k]*bdecay.front.loenergy[k]);
+	  }
+	}
+    }
+
+
+  /* DSSD front 17-32 High and low  */
+  if(((word)bdecay.bit.betabit1 & 0x2 ) != 0) 
+    { 
+      for (i=0;i<16;i++) 
+	{
+	  j=i+16;
+	  k=i+16+1;
+	  if ( rEvent[bdecay.adc.adc02[i].getId()].isValid() ) {
+	    bdecay.front.hienergy[k] = bdecay.adc.adc02[i] + 0.0;
+	    bdecay.front.hiecal[k] = (bdecayv.front.hislope[k]*(bdecay.front.hienergy[k] - bdecayv.front.hioffset[k]));
+	  }
+	  if ( rEvent[bdecay.adc.adc02[j].getId()].isValid() ) {
+	    bdecay.front.loenergy[k] = bdecay.adc.adc02[j] + 0.0;
+	    bdecay.front.loecal[k] = (bdecayv.front.loslope[k]*bdecay.front.loenergy[k]);
+	  }
+	}
+    }
+  
+  /* DSSD front 33-40 High and low */
+
+  if(((word)bdecay.bit.betabit1&0x4) != 0) 
+    { 
+      for (i=0;i<8;i++) 
+	{
+	  k=i+32+1;
+	  j=i+16;
+
+	  if ( rEvent[bdecay.adc.adc03[i].getId()].isValid() ) {
+	    bdecay.front.hienergy[k] = bdecay.adc.adc03[i] + 0.0;
+	    bdecay.front.hiecal[k] = (bdecayv.front.hislope[k]*(bdecay.front.hienergy[k] - bdecayv.front.hioffset[k]));
+	  }
+	  if ( rEvent[bdecay.adc.adc03[j].getId()].isValid() ) {
+	    bdecay.front.loenergy[k] = bdecay.adc.adc03[j] + 0.0;
+	    bdecay.front.loecal[k] = (bdecayv.front.loslope[k]*bdecay.front.loenergy[k]);
+	  }
+	}
+    }
+  
+  /* DSSD back 1-16 High and low */
+
+  if(((word)bdecay.bit.betabit1&0x8) != 0) 
+    { 
+      for (i=0;i<16;i++) 
+	{
+	  k=i+1;
+	  j=i+16;
+	  if ( rEvent[bdecay.adc.adc04[i].getId()].isValid() ) {
+	    bdecay.back.hienergy[k] = bdecay.adc.adc04[i] + 0.0;
+	    bdecay.back.hiecal[k] = (bdecayv.back.hislope[k]*(bdecay.back.hienergy[k] - bdecayv.back.hioffset[k]));
+	  }
+	  if ( rEvent[bdecay.adc.adc04[j].getId()].isValid() ) {
+	    bdecay.back.loenergy[k] = bdecay.adc.adc04[j] + 0.0;
+	    bdecay.back.loecal[k] = (bdecayv.back.loslope[k]*bdecay.back.loenergy[k]);
+	  }
+	}
+    }
+  
+
+  /* DSSD back 17-32 High and low  */
+  if(((word)bdecay.bit.betabit1 & 0x10 ) != 0) 
+    { 
+      for (i=0;i<16;i++) 
+	{
+	  k=i+16+1;
+	  j=i+16;
+	  if ( rEvent[bdecay.adc.adc05[i].getId()].isValid() ) {
+	    bdecay.back.hienergy[k] = bdecay.adc.adc05[i] + 0.0;
+	    bdecay.back.hiecal[k] = (bdecayv.back.hislope[k]*(bdecay.back.hienergy[k] - bdecayv.back.hioffset[k]));
+	  }
+	  if ( rEvent[bdecay.adc.adc05[j].getId()].isValid() ) {
+	    bdecay.back.loenergy[k] = bdecay.adc.adc05[j] + 0.0;
+	    bdecay.back.loecal[k] = (bdecayv.back.loslope[k]*bdecay.back.loenergy[k]);
+	  }
+	}	
+    }
+
+
+  /* DSSD back 33-40 High and low */
+
+  if(((word)bdecay.bit.betabit1&0x20) != 0) 
+    { 
+      for (i=0;i<8;i++) 
+	{
+	  k=i+32+1;
+	  j=i+16;
+	  if ( rEvent[bdecay.adc.adc06[i].getId()].isValid() ) {
+	    bdecay.back.hienergy[k] = bdecay.adc.adc06[i] + 0.0;
+	    bdecay.back.hiecal[k] = (bdecayv.back.hislope[k]*(bdecay.back.hienergy[k] - bdecayv.back.hioffset[k]));
+	  }
+	  if ( rEvent[bdecay.adc.adc06[j].getId()].isValid() ) {
+	    bdecay.back.loenergy[k] = bdecay.adc.adc06[j] + 0.0;
+	    bdecay.back.loecal[k] = (bdecayv.back.loslope[k]*bdecay.back.loenergy[k]);
+	  }
+	}
+    }
+  
+  
+  /* SSSD 1-16 High and low */
+
+  if(((word)bdecay.bit.betabit1&0x40) != 0) 
+    { 
+
+      for (i=0;i<16;i++) 
+	{
+	  k=i+1;
+	  j=i+16;
+	  if ( rEvent[bdecay.adc.adc07[i].getId()].isValid() ) {
+	    bdecay.sssd1.hienergy[k] = bdecay.adc.adc07[i] + 0.0;
+	    bdecay.sssd1.hiecal[k] = (bdecayv.sssd1.hislope[k]*(bdecay.sssd1.hienergy[k] - bdecayv.sssd1.hioffset[k]));
+	  }
+	  if ( rEvent[bdecay.adc.adc07[j].getId()].isValid() ) {
+	    bdecay.sssd1.loenergy[k] = bdecay.adc.adc07[j] + 0.0;
+	    bdecay.sssd1.loecal[k] = (bdecayv.sssd1.loslope[k]*bdecay.sssd1.loenergy[k]);
+	  }
+	}
+    }
+
+  
+  /* SEGA01 */
+
+  if(((word)bdecay.bit.betabit1&0x2000) || ((word)bdecay.bit.betabit1&0x800) != 0) {
+    if ( rEvent[bdecay.sega.energy[1].getId()].isValid() ) {
+      bdecay.sega.ecal[1] = 
+	(bdecayv.sega.square[1]*bdecay.sega.energy[1]*bdecay.sega.energy[1] + 
+	 bdecayv.sega.slope[1]*bdecay.sega.energy[1] + bdecayv.sega.intercept[1]);
+    }    
+  }
+  
+  /* SEGA02 */
+
+  if(((word)bdecay.bit.betabit1&0x4000) || ((word)bdecay.bit.betabit1&0x800) != 0) {
+    if ( rEvent[bdecay.sega.energy[2].getId()].isValid() ) {
+      bdecay.sega.ecal[2] = 
+	(bdecayv.sega.square[2]*bdecay.sega.energy[2]*bdecay.sega.energy[2] + 
+	 bdecayv.sega.slope[2]*bdecay.sega.energy[2] + bdecayv.sega.intercept[2]);
+    }
+  }
+    
+  /* SEGA03 */
+
+  if(((word)bdecay.bit.betabit1&0x8000) || ((word)bdecay.bit.betabit1&0x800) != 0) {
+    if ( rEvent[bdecay.sega.energy[3].getId()].isValid() ) {
+      bdecay.sega.ecal[3] = 
+	(bdecayv.sega.square[3]*bdecay.sega.energy[3]*bdecay.sega.energy[3] + 
+	 bdecayv.sega.slope[3]*bdecay.sega.energy[3] + bdecayv.sega.intercept[3]);
+    }
+  }
+    
+  //cout << "Begin BCS Calibrator" <<endl;
+  //printf("End BCS Calibrator\n");
+
+ return kfTRUE; /* kfFALSE would abort pipeline */  
+ 
+};

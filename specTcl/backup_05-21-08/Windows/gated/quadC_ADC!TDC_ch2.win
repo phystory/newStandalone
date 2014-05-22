@@ -1,0 +1,115 @@
+Geometry 4,4
+# /user/nerotest/Standalone/specTcl/Windows/gated/quadC_ADC!TDC_ch2.win Written by @(#)dispwind.cc	2.2 1/28/94  at Wed Mar 12 16:11:28 2008
+
+Window  0,0,"QUADC_1!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  1,0,"QUADC_2!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  2,0,"QUADC_3!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  3,0,"QUADC_4!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  0,1,"QUADC_5!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  1,1,"QUADC_6!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  2,1,"QUADC_7!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  3,1,"QUADC_8!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  0,2,"QUADC_9!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  1,2,"QUADC_10!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  2,2,"QUADC_11!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  3,2,"QUADC_12!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  0,3,"QUADC_13!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  1,3,"QUADC_14!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  2,3,"QUADC_15!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  3,3,"QUADC_16!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow

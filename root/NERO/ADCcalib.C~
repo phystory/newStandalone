@@ -1,0 +1,10 @@
+int fit() {
+
+  readsource("run212/ADC!TDC/quadA_2!TDC.dat",1);
+  hsource->SetAxisRange(0,1500);
+  hsource->Draw();
+
+
+
+
+}

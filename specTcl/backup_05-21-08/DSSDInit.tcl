@@ -1,0 +1,527 @@
+# DSSDInit.tcl -- DSSD initialization file
+# SpecTcl source file: 01016_bdecayspec.cpp
+# Last modified 2003/01/05 by ACM to start DSSD and SSSD 
+# strip numbering at 01 instead of 00
+
+# Set front decay ADC offsets (BET, 19apr2004)
+# All ADC offsets are based on a 12-bit scale
+
+# Last modified 2005/01/09 by JPC
+
+set bdecayv.front.hioffset.01 16
+set bdecayv.front.hioffset.02 16
+set bdecayv.front.hioffset.03 16
+set bdecayv.front.hioffset.04 16
+set bdecayv.front.hioffset.05 16
+set bdecayv.front.hioffset.06 16
+set bdecayv.front.hioffset.07 16
+set bdecayv.front.hioffset.08 16
+set bdecayv.front.hioffset.09 16
+set bdecayv.front.hioffset.10 16
+set bdecayv.front.hioffset.11 16
+set bdecayv.front.hioffset.12 16
+set bdecayv.front.hioffset.13 16
+set bdecayv.front.hioffset.14 16
+set bdecayv.front.hioffset.15 16
+set bdecayv.front.hioffset.16 16
+set bdecayv.front.hioffset.17 16
+set bdecayv.front.hioffset.18 16
+set bdecayv.front.hioffset.19 16
+set bdecayv.front.hioffset.20 16
+set bdecayv.front.hioffset.21 16
+set bdecayv.front.hioffset.22 16
+set bdecayv.front.hioffset.23 16
+set bdecayv.front.hioffset.24 16
+set bdecayv.front.hioffset.25 16
+set bdecayv.front.hioffset.26 16
+set bdecayv.front.hioffset.27 16
+set bdecayv.front.hioffset.28 16
+set bdecayv.front.hioffset.29 16
+set bdecayv.front.hioffset.30 16
+set bdecayv.front.hioffset.31 16
+set bdecayv.front.hioffset.32 16
+set bdecayv.front.hioffset.33 16
+set bdecayv.front.hioffset.34 16
+set bdecayv.front.hioffset.35 16
+set bdecayv.front.hioffset.36 16
+set bdecayv.front.hioffset.37 16
+set bdecayv.front.hioffset.38 16
+set bdecayv.front.hioffset.39 16
+set bdecayv.front.hioffset.40 16
+
+# Set back decay ADC offsets (BET, 19apr2004)
+
+set bdecayv.back.hioffset.01 24
+set bdecayv.back.hioffset.02 16
+set bdecayv.back.hioffset.03 24
+set bdecayv.back.hioffset.04 16
+set bdecayv.back.hioffset.05 40
+set bdecayv.back.hioffset.06 16
+set bdecayv.back.hioffset.07 16
+set bdecayv.back.hioffset.08 32
+set bdecayv.back.hioffset.09 16
+set bdecayv.back.hioffset.10 40
+set bdecayv.back.hioffset.11 16
+set bdecayv.back.hioffset.12 24
+set bdecayv.back.hioffset.13 16
+set bdecayv.back.hioffset.14 32
+set bdecayv.back.hioffset.15 24
+set bdecayv.back.hioffset.16 16
+set bdecayv.back.hioffset.17 16
+set bdecayv.back.hioffset.18 40
+set bdecayv.back.hioffset.19 24
+set bdecayv.back.hioffset.20 24
+set bdecayv.back.hioffset.21 24
+set bdecayv.back.hioffset.22 56
+set bdecayv.back.hioffset.23 32
+set bdecayv.back.hioffset.24 72
+set bdecayv.back.hioffset.25 56
+set bdecayv.back.hioffset.26 16
+set bdecayv.back.hioffset.27 16
+set bdecayv.back.hioffset.28 48
+set bdecayv.back.hioffset.29 16
+set bdecayv.back.hioffset.30 24
+set bdecayv.back.hioffset.31 16
+set bdecayv.back.hioffset.32 24
+set bdecayv.back.hioffset.33 16
+set bdecayv.back.hioffset.34 16
+set bdecayv.back.hioffset.35 16
+set bdecayv.back.hioffset.36 24
+set bdecayv.back.hioffset.37 24
+set bdecayv.back.hioffset.38 56
+set bdecayv.back.hioffset.39 24
+set bdecayv.back.hioffset.40 16
+
+# Set front decay gains (vt, 2004/04/19)
+# All gains are based on peak positions on a 9-bit scale
+
+set bdecayv.front.hislope.01 [expr 350.0/(390.0 - (${bdecayv.front.hioffset.01}/8.0))]
+set bdecayv.front.hislope.02 [expr 350.0/(393.0 - (${bdecayv.front.hioffset.02}/8.0))]
+set bdecayv.front.hislope.03 [expr 350.0/(370.0 - (${bdecayv.front.hioffset.03}/8.0))]
+set bdecayv.front.hislope.04 [expr 350.0/(393.0 - (${bdecayv.front.hioffset.04}/8.0))]
+set bdecayv.front.hislope.05 [expr 350.0/(384.0 - (${bdecayv.front.hioffset.05}/8.0))]
+set bdecayv.front.hislope.06 [expr 350.0/(394.0 - (${bdecayv.front.hioffset.06}/8.0))]
+set bdecayv.front.hislope.07 [expr 350.0/(379.0 - (${bdecayv.front.hioffset.07}/8.0))]
+set bdecayv.front.hislope.08 [expr 350.0/(382.0 - (${bdecayv.front.hioffset.08}/8.0))]
+set bdecayv.front.hislope.09 [expr 350.0/(406.0 - (${bdecayv.front.hioffset.09}/8.0))]
+set bdecayv.front.hislope.10 [expr 350.0/(395.0 - (${bdecayv.front.hioffset.10}/8.0))]
+set bdecayv.front.hislope.11 [expr 350.0/(408.0 - (${bdecayv.front.hioffset.11}/8.0))]
+set bdecayv.front.hislope.12 [expr 350.0/(396.0 - (${bdecayv.front.hioffset.12}/8.0))]
+set bdecayv.front.hislope.13 [expr 350.0/(396.0 - (${bdecayv.front.hioffset.13}/8.0))]
+set bdecayv.front.hislope.14 [expr 350.0/(384.0 - (${bdecayv.front.hioffset.14}/8.0))]
+set bdecayv.front.hislope.15 [expr 350.0/(396.0 - (${bdecayv.front.hioffset.15}/8.0))]
+set bdecayv.front.hislope.16 [expr 350.0/(407.0 - (${bdecayv.front.hioffset.16}/8.0))]
+set bdecayv.front.hislope.17 [expr 350.0/(394.0 - (${bdecayv.front.hioffset.17}/8.0))]
+set bdecayv.front.hislope.18 [expr 350.0/(410.0 - (${bdecayv.front.hioffset.18}/8.0))]
+set bdecayv.front.hislope.19 [expr 350.0/(379.0 - (${bdecayv.front.hioffset.19}/8.0))]
+set bdecayv.front.hislope.20 [expr 350.0/(388.0 - (${bdecayv.front.hioffset.20}/8.0))]
+set bdecayv.front.hislope.21 [expr 350.0/(364.0 - (${bdecayv.front.hioffset.21}/8.0))]
+set bdecayv.front.hislope.22 [expr 350.0/(395.0 - (${bdecayv.front.hioffset.22}/8.0))]
+set bdecayv.front.hislope.23 [expr 350.0/(360.0 - (${bdecayv.front.hioffset.23}/8.0))]
+set bdecayv.front.hislope.24 [expr 350.0/(387.0 - (${bdecayv.front.hioffset.24}/8.0))]
+set bdecayv.front.hislope.25 [expr 350.0/(380.0 - (${bdecayv.front.hioffset.25}/8.0))]
+set bdecayv.front.hislope.26 [expr 350.0/(375.0 - (${bdecayv.front.hioffset.26}/8.0))]
+set bdecayv.front.hislope.27 [expr 350.0/(365.0 - (${bdecayv.front.hioffset.27}/8.0))]
+set bdecayv.front.hislope.28 [expr 350.0/(379.0 - (${bdecayv.front.hioffset.28}/8.0))]
+set bdecayv.front.hislope.29 [expr 350.0/(368.0 - (${bdecayv.front.hioffset.29}/8.0))]
+set bdecayv.front.hislope.30 [expr 350.0/(391.0 - (${bdecayv.front.hioffset.30}/8.0))]
+set bdecayv.front.hislope.31 [expr 350.0/(370.0 - (${bdecayv.front.hioffset.31}/8.0))]
+set bdecayv.front.hislope.32 [expr 350.0/(394.0 - (${bdecayv.front.hioffset.32}/8.0))]
+set bdecayv.front.hislope.33 [expr 350.0/(381.0 - (${bdecayv.front.hioffset.33}/8.0))]
+set bdecayv.front.hislope.34 [expr 350.0/(372.0 - (${bdecayv.front.hioffset.34}/8.0))]
+set bdecayv.front.hislope.35 [expr 350.0/(352.0 - (${bdecayv.front.hioffset.35}/8.0))]
+set bdecayv.front.hislope.36 [expr 350.0/(361.0 - (${bdecayv.front.hioffset.36}/8.0))]
+set bdecayv.front.hislope.37 [expr 350.0/(378.0 - (${bdecayv.front.hioffset.37}/8.0))]
+set bdecayv.front.hislope.38 [expr 350.0/(399.0 - (${bdecayv.front.hioffset.38}/8.0))]
+set bdecayv.front.hislope.39 [expr 350.0/(394.0 - (${bdecayv.front.hioffset.39}/8.0))]
+set bdecayv.front.hislope.40 [expr 350.0/(400.0 - (${bdecayv.front.hioffset.40}/8.0))]
+
+# Set back decay gains (vt, 2004/04/19)
+
+set bdecayv.back.hislope.01 [expr 350.0/(391.0 - (${bdecayv.back.hioffset.01}/8.0))]
+set bdecayv.back.hislope.02 [expr 350.0/(406.0 - (${bdecayv.back.hioffset.02}/8.0))]
+set bdecayv.back.hislope.03 [expr 350.0/(424.0 - (${bdecayv.back.hioffset.03}/8.0))]
+set bdecayv.back.hislope.04 [expr 350.0/(367.0 - (${bdecayv.back.hioffset.04}/8.0))]
+set bdecayv.back.hislope.05 [expr 350.0/(373.0 - (${bdecayv.back.hioffset.05}/8.0))]
+set bdecayv.back.hislope.06 [expr 350.0/(384.0 - (${bdecayv.back.hioffset.06}/8.0))]
+set bdecayv.back.hislope.07 [expr 350.0/(374.0 - (${bdecayv.back.hioffset.07}/8.0))]
+set bdecayv.back.hislope.08 [expr 350.0/(407.0 - (${bdecayv.back.hioffset.08}/8.0))]
+set bdecayv.back.hislope.09 [expr 350.0/(394.0 - (${bdecayv.back.hioffset.09}/8.0))]
+set bdecayv.back.hislope.10 [expr 350.0/(390.0 - (${bdecayv.back.hioffset.10}/8.0))]
+set bdecayv.back.hislope.11 [expr 350.0/(381.0 - (${bdecayv.back.hioffset.11}/8.0))]
+set bdecayv.back.hislope.12 [expr 350.0/(397.0 - (${bdecayv.back.hioffset.12}/8.0))]
+set bdecayv.back.hislope.13 [expr 350.0/(375.0 - (${bdecayv.back.hioffset.13}/8.0))]
+set bdecayv.back.hislope.14 [expr 350.0/(397.0 - (${bdecayv.back.hioffset.14}/8.0))]
+set bdecayv.back.hislope.15 [expr 350.0/(399.0 - (${bdecayv.back.hioffset.15}/8.0))]
+set bdecayv.back.hislope.16 [expr 350.0/(388.0 - (${bdecayv.back.hioffset.16}/8.0))]
+set bdecayv.back.hislope.17 [expr 350.0/(419.0 - (${bdecayv.back.hioffset.17}/8.0))]
+set bdecayv.back.hislope.18 [expr 350.0/(399.0 - (${bdecayv.back.hioffset.18}/8.0))]
+set bdecayv.back.hislope.19 [expr 350.0/(369.0 - (${bdecayv.back.hioffset.19}/8.0))]
+set bdecayv.back.hislope.20 [expr 350.0/(426.0 - (${bdecayv.back.hioffset.20}/8.0))]
+set bdecayv.back.hislope.21 [expr 350.0/(377.0 - (${bdecayv.back.hioffset.21}/8.0))]
+set bdecayv.back.hislope.22 [expr 350.0/(378.0 - (${bdecayv.back.hioffset.22}/8.0))]
+set bdecayv.back.hislope.23 [expr 350.0/(382.0 - (${bdecayv.back.hioffset.23}/8.0))]
+set bdecayv.back.hislope.24 [expr 350.0/(416.0 - (${bdecayv.back.hioffset.24}/8.0))]
+set bdecayv.back.hislope.25 [expr 350.0/(381.0 - (${bdecayv.back.hioffset.25}/8.0))]
+set bdecayv.back.hislope.26 [expr 350.0/(399.0 - (${bdecayv.back.hioffset.26}/8.0))]
+set bdecayv.back.hislope.27 [expr 350.0/(368.0 - (${bdecayv.back.hioffset.27}/8.0))]
+set bdecayv.back.hislope.28 [expr 350.0/(373.0 - (${bdecayv.back.hioffset.28}/8.0))]
+set bdecayv.back.hislope.29 [expr 350.0/(371.0 - (${bdecayv.back.hioffset.29}/8.0))]
+set bdecayv.back.hislope.30 [expr 350.0/(371.0 - (${bdecayv.back.hioffset.30}/8.0))]
+set bdecayv.back.hislope.31 [expr 350.0/(380.0 - (${bdecayv.back.hioffset.31}/8.0))]
+set bdecayv.back.hislope.32 [expr 350.0/(413.0 - (${bdecayv.back.hioffset.32}/8.0))]
+set bdecayv.back.hislope.33 [expr 350.0/(401.0 - (${bdecayv.back.hioffset.33}/8.0))]
+set bdecayv.back.hislope.34 [expr 350.0/(404.0 - (${bdecayv.back.hioffset.34}/8.0))]
+set bdecayv.back.hislope.35 [expr 350.0/(385.0 - (${bdecayv.back.hioffset.35}/8.0))]
+set bdecayv.back.hislope.36 [expr 350.0/(400.0 - (${bdecayv.back.hioffset.36}/8.0))]
+set bdecayv.back.hislope.37 [expr 350.0/(378.0 - (${bdecayv.back.hioffset.37}/8.0))]
+set bdecayv.back.hislope.38 [expr 350.0/(387.0 - (${bdecayv.back.hioffset.38}/8.0))]
+set bdecayv.back.hislope.39 [expr 350.0/(375.0 - (${bdecayv.back.hioffset.39}/8.0))]
+set bdecayv.back.hislope.40 [expr 350.0/(386.0 - (${bdecayv.back.hioffset.40}/8.0))]
+
+# Set front implant gains 
+
+set bdecayv.front.loslope.01 [expr 350.0/350.0]
+set bdecayv.front.loslope.02 [expr 350.0/350.0]
+set bdecayv.front.loslope.03 [expr 350.0/350.0]
+set bdecayv.front.loslope.04 [expr 350.0/350.0]
+set bdecayv.front.loslope.05 [expr 350.0/350.0]
+set bdecayv.front.loslope.06 [expr 350.0/350.0]
+set bdecayv.front.loslope.07 [expr 350.0/350.0]
+set bdecayv.front.loslope.08 [expr 350.0/350.0]
+set bdecayv.front.loslope.09 [expr 350.0/350.0]
+set bdecayv.front.loslope.10 [expr 350.0/350.0]
+set bdecayv.front.loslope.11 [expr 350.0/350.0]
+set bdecayv.front.loslope.12 [expr 350.0/350.0]
+set bdecayv.front.loslope.13 [expr 350.0/350.0]
+set bdecayv.front.loslope.14 [expr 350.0/350.0]
+set bdecayv.front.loslope.15 [expr 350.0/350.0]
+set bdecayv.front.loslope.16 [expr 350.0/350.0]
+set bdecayv.front.loslope.17 [expr 350.0/350.0]
+set bdecayv.front.loslope.18 [expr 350.0/350.0]
+set bdecayv.front.loslope.19 [expr 350.0/350.0]
+set bdecayv.front.loslope.20 [expr 350.0/350.0]
+set bdecayv.front.loslope.21 [expr 350.0/350.0]
+set bdecayv.front.loslope.22 [expr 350.0/350.0]
+set bdecayv.front.loslope.23 [expr 350.0/350.0]
+set bdecayv.front.loslope.24 [expr 350.0/350.0]
+set bdecayv.front.loslope.25 [expr 350.0/350.0]
+set bdecayv.front.loslope.26 [expr 350.0/350.0]
+set bdecayv.front.loslope.27 [expr 350.0/350.0]
+set bdecayv.front.loslope.28 [expr 350.0/350.0]
+set bdecayv.front.loslope.29 [expr 350.0/350.0]
+set bdecayv.front.loslope.30 [expr 350.0/350.0]
+set bdecayv.front.loslope.31 [expr 350.0/350.0]
+set bdecayv.front.loslope.32 [expr 350.0/350.0]
+set bdecayv.front.loslope.33 [expr 350.0/350.0]
+set bdecayv.front.loslope.34 [expr 350.0/350.0]
+set bdecayv.front.loslope.35 [expr 350.0/350.0]
+set bdecayv.front.loslope.36 [expr 350.0/350.0]
+set bdecayv.front.loslope.37 [expr 350.0/350.0]
+set bdecayv.front.loslope.38 [expr 350.0/350.0]
+set bdecayv.front.loslope.39 [expr 350.0/350.0]
+set bdecayv.front.loslope.40 [expr 350.0/350.0]
+
+# Set back implant gains
+
+set bdecayv.back.loslope.01 [expr 350.0/350.0]
+set bdecayv.back.loslope.02 [expr 350.0/350.0]
+set bdecayv.back.loslope.03 [expr 350.0/350.0]
+set bdecayv.back.loslope.04 [expr 350.0/350.0]
+set bdecayv.back.loslope.05 [expr 350.0/350.0]
+set bdecayv.back.loslope.06 [expr 350.0/350.0]
+set bdecayv.back.loslope.07 [expr 350.0/350.0]
+set bdecayv.back.loslope.08 [expr 350.0/350.0]
+set bdecayv.back.loslope.09 [expr 350.0/350.0]
+set bdecayv.back.loslope.10 [expr 350.0/350.0]
+set bdecayv.back.loslope.11 [expr 350.0/350.0]
+set bdecayv.back.loslope.12 [expr 350.0/350.0]
+set bdecayv.back.loslope.13 [expr 350.0/350.0]
+set bdecayv.back.loslope.14 [expr 350.0/350.0]
+set bdecayv.back.loslope.15 [expr 350.0/350.0]
+set bdecayv.back.loslope.16 [expr 350.0/350.0]
+set bdecayv.back.loslope.17 [expr 350.0/350.0]
+set bdecayv.back.loslope.18 [expr 350.0/350.0]
+set bdecayv.back.loslope.19 [expr 350.0/350.0]
+set bdecayv.back.loslope.20 [expr 350.0/350.0]
+set bdecayv.back.loslope.21 [expr 350.0/350.0]
+set bdecayv.back.loslope.22 [expr 350.0/350.0]
+set bdecayv.back.loslope.23 [expr 350.0/350.0]
+set bdecayv.back.loslope.24 [expr 350.0/350.0]
+set bdecayv.back.loslope.25 [expr 350.0/350.0]
+set bdecayv.back.loslope.26 [expr 350.0/350.0]
+set bdecayv.back.loslope.27 [expr 350.0/350.0]
+set bdecayv.back.loslope.28 [expr 350.0/350.0]
+set bdecayv.back.loslope.29 [expr 350.0/350.0]
+set bdecayv.back.loslope.30 [expr 350.0/350.0]
+set bdecayv.back.loslope.31 [expr 350.0/350.0]
+set bdecayv.back.loslope.32 [expr 350.0/350.0]
+set bdecayv.back.loslope.33 [expr 350.0/350.0]
+set bdecayv.back.loslope.34 [expr 350.0/350.0]
+set bdecayv.back.loslope.35 [expr 350.0/350.0]
+set bdecayv.back.loslope.36 [expr 350.0/350.0]
+set bdecayv.back.loslope.37 [expr 350.0/350.0]
+set bdecayv.back.loslope.38 [expr 350.0/350.0]
+set bdecayv.back.loslope.39 [expr 350.0/350.0]
+set bdecayv.back.loslope.40 [expr 350.0/350.0]
+
+# Set front decay thresholds (pfm, 2004/04/22)
+
+set bdecayv.fthresh.hithresh.01 160
+set bdecayv.fthresh.hithresh.02 160
+set bdecayv.fthresh.hithresh.03 152
+set bdecayv.fthresh.hithresh.04 136
+set bdecayv.fthresh.hithresh.05 160
+set bdecayv.fthresh.hithresh.06 160
+set bdecayv.fthresh.hithresh.07 160
+set bdecayv.fthresh.hithresh.08 160
+set bdecayv.fthresh.hithresh.09 160
+set bdecayv.fthresh.hithresh.10 160
+set bdecayv.fthresh.hithresh.11 160
+set bdecayv.fthresh.hithresh.12 160
+set bdecayv.fthresh.hithresh.13 160
+set bdecayv.fthresh.hithresh.14 160
+set bdecayv.fthresh.hithresh.15 160
+set bdecayv.fthresh.hithresh.16 168
+set bdecayv.fthresh.hithresh.17 192
+set bdecayv.fthresh.hithresh.18 136
+set bdecayv.fthresh.hithresh.19 160
+set bdecayv.fthresh.hithresh.20 160
+set bdecayv.fthresh.hithresh.21 152
+set bdecayv.fthresh.hithresh.22 160
+set bdecayv.fthresh.hithresh.23 152
+set bdecayv.fthresh.hithresh.24 128
+set bdecayv.fthresh.hithresh.25 136
+set bdecayv.fthresh.hithresh.26 144
+set bdecayv.fthresh.hithresh.27 120
+set bdecayv.fthresh.hithresh.28 120
+set bdecayv.fthresh.hithresh.29 152
+set bdecayv.fthresh.hithresh.30 136
+set bdecayv.fthresh.hithresh.31 160
+set bdecayv.fthresh.hithresh.32 168
+set bdecayv.fthresh.hithresh.33 160
+set bdecayv.fthresh.hithresh.34 96
+set bdecayv.fthresh.hithresh.35 96
+set bdecayv.fthresh.hithresh.36 112
+set bdecayv.fthresh.hithresh.37 120
+set bdecayv.fthresh.hithresh.38 104
+set bdecayv.fthresh.hithresh.39 104
+set bdecayv.fthresh.hithresh.40 104
+
+# Set back decay thresholds (SNL, 2004/04/22)
+
+set bdecayv.bthresh.hithresh.01 128
+set bdecayv.bthresh.hithresh.02 136
+set bdecayv.bthresh.hithresh.03 160
+set bdecayv.bthresh.hithresh.04 104
+set bdecayv.bthresh.hithresh.05 160
+set bdecayv.bthresh.hithresh.06 144
+set bdecayv.bthresh.hithresh.07 120
+set bdecayv.bthresh.hithresh.08 160
+set bdecayv.bthresh.hithresh.09 152
+set bdecayv.bthresh.hithresh.10 160
+set bdecayv.bthresh.hithresh.11 144
+set bdecayv.bthresh.hithresh.12 144
+set bdecayv.bthresh.hithresh.13 144
+set bdecayv.bthresh.hithresh.14 144
+set bdecayv.bthresh.hithresh.15 144
+set bdecayv.bthresh.hithresh.16 120
+set bdecayv.bthresh.hithresh.17 112
+set bdecayv.bthresh.hithresh.18 120
+set bdecayv.bthresh.hithresh.19 120
+set bdecayv.bthresh.hithresh.20 120
+set bdecayv.bthresh.hithresh.21 120
+set bdecayv.bthresh.hithresh.22 120
+set bdecayv.bthresh.hithresh.23 120
+set bdecayv.bthresh.hithresh.24 120
+set bdecayv.bthresh.hithresh.25 120
+set bdecayv.bthresh.hithresh.26 120
+set bdecayv.bthresh.hithresh.27 120
+set bdecayv.bthresh.hithresh.28 120
+set bdecayv.bthresh.hithresh.29 120
+set bdecayv.bthresh.hithresh.30 120
+set bdecayv.bthresh.hithresh.31 120
+set bdecayv.bthresh.hithresh.32 104
+set bdecayv.bthresh.hithresh.33 136
+set bdecayv.bthresh.hithresh.34 136
+set bdecayv.bthresh.hithresh.35 136
+set bdecayv.bthresh.hithresh.36 136
+set bdecayv.bthresh.hithresh.37 136
+set bdecayv.bthresh.hithresh.38 120
+set bdecayv.bthresh.hithresh.39 128
+set bdecayv.bthresh.hithresh.40 144
+
+# Set front implant thresholds (PFM, 2004/04/22)
+
+set bdecayv.fthresh.lothresh.01 154.0
+set bdecayv.fthresh.lothresh.02 96.0
+set bdecayv.fthresh.lothresh.03 160.0
+set bdecayv.fthresh.lothresh.04 120.0
+set bdecayv.fthresh.lothresh.05 112.0
+set bdecayv.fthresh.lothresh.06 120.0
+set bdecayv.fthresh.lothresh.07 112.0
+set bdecayv.fthresh.lothresh.08 120.0
+set bdecayv.fthresh.lothresh.09 120.0
+set bdecayv.fthresh.lothresh.10 4095.0
+set bdecayv.fthresh.lothresh.11 120.0
+set bdecayv.fthresh.lothresh.12 136.0
+set bdecayv.fthresh.lothresh.13 112.0
+set bdecayv.fthresh.lothresh.14 136.0
+set bdecayv.fthresh.lothresh.15 128.0
+set bdecayv.fthresh.lothresh.16 120.0
+set bdecayv.fthresh.lothresh.17 120.0
+set bdecayv.fthresh.lothresh.18 136.0
+set bdecayv.fthresh.lothresh.19 152.0
+set bdecayv.fthresh.lothresh.20 120.0
+set bdecayv.fthresh.lothresh.21 160.0
+set bdecayv.fthresh.lothresh.22 120.0
+set bdecayv.fthresh.lothresh.23 128.0
+set bdecayv.fthresh.lothresh.24 112.0
+set bdecayv.fthresh.lothresh.25 144.0
+set bdecayv.fthresh.lothresh.26 112.0
+set bdecayv.fthresh.lothresh.27 136.0
+set bdecayv.fthresh.lothresh.28 136.0
+set bdecayv.fthresh.lothresh.29 136.0
+set bdecayv.fthresh.lothresh.30 144.0
+set bdecayv.fthresh.lothresh.31 136.0
+set bdecayv.fthresh.lothresh.32 88.0
+set bdecayv.fthresh.lothresh.33 88.0
+set bdecayv.fthresh.lothresh.34 88.0
+set bdecayv.fthresh.lothresh.35 120.0
+set bdecayv.fthresh.lothresh.36 88.0
+set bdecayv.fthresh.lothresh.37 104.0
+set bdecayv.fthresh.lothresh.38 96.0
+set bdecayv.fthresh.lothresh.39 88.0
+set bdecayv.fthresh.lothresh.40 96.0
+
+# Set back implant thresholds (PFM, 2004/04/22)
+
+set bdecayv.bthresh.lothresh.01 180.0
+set bdecayv.bthresh.lothresh.02 112.0
+set bdecayv.bthresh.lothresh.03 112.0
+set bdecayv.bthresh.lothresh.04 104.0
+set bdecayv.bthresh.lothresh.05 136.0
+set bdecayv.bthresh.lothresh.06 112.0
+set bdecayv.bthresh.lothresh.07 128.0
+set bdecayv.bthresh.lothresh.08 104.0
+set bdecayv.bthresh.lothresh.09 120.0
+set bdecayv.bthresh.lothresh.10 112.0
+set bdecayv.bthresh.lothresh.11 104.0
+set bdecayv.bthresh.lothresh.12 144.0
+set bdecayv.bthresh.lothresh.13 112.0
+set bdecayv.bthresh.lothresh.14 104.0
+set bdecayv.bthresh.lothresh.15 120.0
+set bdecayv.bthresh.lothresh.16 104.0
+set bdecayv.bthresh.lothresh.17 120.0
+set bdecayv.bthresh.lothresh.18 120.0
+set bdecayv.bthresh.lothresh.19 136.0
+set bdecayv.bthresh.lothresh.20 112.0
+set bdecayv.bthresh.lothresh.21 136.0
+set bdecayv.bthresh.lothresh.22 128.0
+set bdecayv.bthresh.lothresh.23 128.0
+set bdecayv.bthresh.lothresh.24 112.0
+set bdecayv.bthresh.lothresh.25 128.0
+set bdecayv.bthresh.lothresh.26 120.0
+set bdecayv.bthresh.lothresh.27 112.0
+set bdecayv.bthresh.lothresh.28 120.0
+set bdecayv.bthresh.lothresh.29 104.0
+set bdecayv.bthresh.lothresh.30 104.0
+set bdecayv.bthresh.lothresh.31 112.0
+set bdecayv.bthresh.lothresh.32 104.0
+set bdecayv.bthresh.lothresh.33 112.0
+set bdecayv.bthresh.lothresh.34 128.0
+set bdecayv.bthresh.lothresh.35 120.0
+set bdecayv.bthresh.lothresh.36 112.0
+set bdecayv.bthresh.lothresh.37 120.0
+set bdecayv.bthresh.lothresh.38 120.0
+set bdecayv.bthresh.lothresh.39 120.0
+set bdecayv.bthresh.lothresh.40 120.0
+
+# Set front decay upper level threshold (ACM, 2003/03/05)
+
+set bdecayv.fthresh.duld.01 3800.0
+set bdecayv.fthresh.duld.02 3800.0
+set bdecayv.fthresh.duld.03 3800.0
+set bdecayv.fthresh.duld.04 3800.0
+set bdecayv.fthresh.duld.05 3800.0
+set bdecayv.fthresh.duld.06 3800.0
+set bdecayv.fthresh.duld.07 3800.0
+set bdecayv.fthresh.duld.08 3800.0
+set bdecayv.fthresh.duld.09 3800.0
+set bdecayv.fthresh.duld.10 3800.0
+set bdecayv.fthresh.duld.11 3800.0
+set bdecayv.fthresh.duld.12 3800.0
+set bdecayv.fthresh.duld.13 3800.0
+set bdecayv.fthresh.duld.14 3800.0
+set bdecayv.fthresh.duld.15 3800.0
+set bdecayv.fthresh.duld.16 3800.0
+set bdecayv.fthresh.duld.17 3800.0
+set bdecayv.fthresh.duld.18 3800.0
+set bdecayv.fthresh.duld.19 3800.0
+set bdecayv.fthresh.duld.20 3800.0
+set bdecayv.fthresh.duld.21 3800.0
+set bdecayv.fthresh.duld.22 3800.0
+set bdecayv.fthresh.duld.23 3800.0
+set bdecayv.fthresh.duld.24 3800.0
+set bdecayv.fthresh.duld.25 3800.0
+set bdecayv.fthresh.duld.26 3800.0
+set bdecayv.fthresh.duld.27 3800.0
+set bdecayv.fthresh.duld.28 3800.0
+set bdecayv.fthresh.duld.29 3800.0
+set bdecayv.fthresh.duld.30 3800.0
+set bdecayv.fthresh.duld.31 3800.0
+set bdecayv.fthresh.duld.32 3800.0
+set bdecayv.fthresh.duld.33 3800.0
+set bdecayv.fthresh.duld.34 3800.0
+set bdecayv.fthresh.duld.35 3800.0
+set bdecayv.fthresh.duld.36 3800.0
+set bdecayv.fthresh.duld.37 3800.0
+set bdecayv.fthresh.duld.38 3800.0
+set bdecayv.fthresh.duld.39 3800.0
+set bdecayv.fthresh.duld.40 3800.0
+
+# Set back decay upper level thresholds (ACM, 2003/03/05)
+
+set bdecayv.bthresh.duld.01 3800.0
+set bdecayv.bthresh.duld.02 3800.0
+set bdecayv.bthresh.duld.03 3800.0
+set bdecayv.bthresh.duld.04 3800.0
+set bdecayv.bthresh.duld.05 3800.0
+set bdecayv.bthresh.duld.06 3800.0
+set bdecayv.bthresh.duld.07 3800.0
+set bdecayv.bthresh.duld.08 3800.0
+set bdecayv.bthresh.duld.09 3800.0
+set bdecayv.bthresh.duld.10 3800.0
+set bdecayv.bthresh.duld.11 3800.0
+set bdecayv.bthresh.duld.12 3800.0
+set bdecayv.bthresh.duld.13 3800.0
+set bdecayv.bthresh.duld.14 3800.0
+set bdecayv.bthresh.duld.15 3800.0
+set bdecayv.bthresh.duld.16 3800.0
+set bdecayv.bthresh.duld.17 3800.0
+set bdecayv.bthresh.duld.18 3800.0
+set bdecayv.bthresh.duld.19 3800.0
+set bdecayv.bthresh.duld.20 3800.0
+set bdecayv.bthresh.duld.21 3800.0
+set bdecayv.bthresh.duld.22 3800.0
+set bdecayv.bthresh.duld.23 3800.0
+set bdecayv.bthresh.duld.24 3800.0
+set bdecayv.bthresh.duld.25 3800.0
+set bdecayv.bthresh.duld.26 3800.0
+set bdecayv.bthresh.duld.27 3800.0
+set bdecayv.bthresh.duld.28 3800.0
+set bdecayv.bthresh.duld.29 3800.0
+set bdecayv.bthresh.duld.30 3800.0
+set bdecayv.bthresh.duld.31 3800.0
+set bdecayv.bthresh.duld.32 3800.0
+set bdecayv.bthresh.duld.33 3800.0
+set bdecayv.bthresh.duld.34 3800.0
+set bdecayv.bthresh.duld.35 3800.0
+set bdecayv.bthresh.duld.36 3800.0
+set bdecayv.bthresh.duld.37 3800.0
+set bdecayv.bthresh.duld.38 3800.0
+set bdecayv.bthresh.duld.39 3800.0
+set bdecayv.bthresh.duld.40 3800.0
+
+# End variable initialization
+

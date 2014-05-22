@@ -1,0 +1,99 @@
+Geometry 4,4
+# /user/03034/SpecTcl/Online/Windows/newcheckNERO_T_C.win Written by @(#)dispwind.cc	2.2 1/28/94  at Thu Nov 17 10:35:25 2005
+
+Window  0,0,"QUADCTIME1"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  1,0,"QUADCTIME2"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  2,0,"QUADCTIME3"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  3,0,"QUADCTIME4"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  0,1,"QUADCTIME5"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  1,1,"QUADCTIME6"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  2,1,"QUADCTIME7"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  3,1,"QUADCTIME8"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  0,2,"QUADCTIME9"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  1,2,"QUADCTIME10"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  2,2,"QUADCTIME11"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  3,2,"QUADCTIME12"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  0,3,"QUADCTIME13"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  1,3,"QUADCTIME14"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  2,3,"QUADCTIME15"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow
+Window  3,3,"QUADCTIME16"
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   MAPPED 0
+   Expanded 0,1000
+Endwindow

@@ -1,0 +1,204 @@
+Geometry 6,6
+# /user/nerotest/Standalone/specTcl/Xamine Windows/cfd_thresholds/quadA_E_gated_by_TDC.win Written by @(#)dispwind.cc	2.2 1/28/94  at Thu Sep 25 12:06:11 2008
+
+Window  0,0,"QUADA_1!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,0,"QUADA_2!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  2,0,"QUADA_3!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  3,0,"QUADA_4!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  4,0,"QUADA_5!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  5,0,"QUADA_6!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  0,1,"QUADA_1!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,1,"QUADA_2!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  2,1,"QUADA_3!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,1,"QUADA_4!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  4,1,"QUADA_5!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  5,1,"QUADA_6!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  0,2,"QUADA_7!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,2,"QUADA_8!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  2,2,"QUADA_9!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,2,"QUADA_10!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  4,2,"QUADA_11!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  5,2,"QUADA_12!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  0,3,"QUADA_7!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,3,"QUADA_8!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  2,3,"QUADA_9!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,3,"QUADA_10!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  4,3,"QUADA_11!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  5,3,"QUADA_12!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  0,4,"QUADA_13!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,4,"QUADA_14!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  2,4,"QUADA_15!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,4,"QUADA_16!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  4,4,"CRS_QDC_00_ENERGY!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  5,4,"CRS_QDC_01_ENERGY!TDC_0-50"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  0,5,"QUADA_13!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,5,"QUADA_14!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  2,5,"QUADA_15!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,5,"QUADA_16!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  4,5,"CRS_QDC_00_ENERGY!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   MAPPED 1
+Endwindow
+Window  5,5,"CRS_QDC_01_ENERGY!TDC_50-400000"
+   LABEL OBJECTS
+   SCALE  AUTO
+   Refresh 2
+   MAPPED 1
+Endwindow

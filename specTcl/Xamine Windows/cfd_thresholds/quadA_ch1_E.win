@@ -1,0 +1,27 @@
+Geometry 1,3
+# /user/nerotest/Standalone/specTcl/Windows/cfd_thresholds/quadA_ch1_E.win Written by @(#)dispwind.cc	2.2 1/28/94  at Thu Mar 13 15:04:23 2008
+
+Window  0,0,"QUADA_1"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  0,1,"QUADA_1!TDC"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+   Expanded 0,1200
+Endwindow
+Window  0,2,"QUADA_1!TDC_CH2"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+   Expanded 0,1200
+Endwindow

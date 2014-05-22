@@ -1,0 +1,14 @@
+Wait version 1.0 (C) Copyright 2002 Michigan State University all rights reserved
+Wait comes with ABSOLUTELY NO WARRANTY;
+This is free software, and you are welcome to redistribute it
+under certain conditions; See http://www.gnu.org/licenses/gpl.txt
+for details
+Wait was written by:
+
+Ron Fox
+Usage:
+   ReadoutShell.tcl host path ftphost passwd
+       host - Name of the host on which to run the Readout.
+       path - Path to readout program to run.
+       ftphost - Name of the host on which to ftp event files
+       passwd  - ftp login password.

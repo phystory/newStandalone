@@ -1,0 +1,227 @@
+Geometry 6,6
+# /user/nerotest/Standalone/specTcl/Xamine Windows/cfd_thresholds/CRS_QDC.win Written by @(#)dispwind.cc	2.2 1/28/94  at Fri Jun  6 15:52:07 2008
+
+Window  0,0,"CRS_QDC_00_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,0,"CRS_QDC_01_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  2,0,"CRS_QDC_02_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,0,"CRS_QDC_03_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  4,0,"CRS_QDC_04_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  5,0,"CRS_QDC_05_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  0,1,"CRS_QDC_06_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,1,"CRS_QDC_07_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  2,1,"CRS_QDC_08_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,1,"CRS_QDC_09_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  4,1,"CRS_QDC_10_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  5,1,"CRS_QDC_11_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  0,2,"CRS_QDC_12_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,2,"CRS_QDC_13_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  2,2,"CRS_QDC_14_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,2,"CRS_QDC_15_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  4,2,"CRS_QDC_16_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  5,2,"CRS_QDC_17_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  0,3,"CRS_QDC_18_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,3,"CRS_QDC_19_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  2,3,"CRS_QDC_20_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,3,"CRS_QDC_21_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  4,3,"CRS_QDC_22_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  5,3,"CRS_QDC_23_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  0,4,"CRS_QDC_24_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,4,"CRS_QDC_25_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  2,4,"CRS_QDC_26_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  3,4,"CRS_QDC_27_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  4,4,"CRS_QDC_28_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  5,4,"CRS_QDC_29_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  0,5,"CRS_QDC_30_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow
+Window  1,5,"CRS_QDC_31_ENERGY"
+   LABEL OBJECTS
+   SCALE  AUTO
+   COUNTSAXIS  LOG
+   Refresh 2
+   MAPPED 1
+Endwindow

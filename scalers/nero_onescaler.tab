@@ -1,0 +1,92 @@
+############################################################################# 
+#   New scaler display configuration file for Beta endstation
+#   This new software is only avilable after DAQ release 7.4
+#   Jorge Pereira G.Lorusso M.Quinn 4/26/2005
+############################################################################# 
+#   Define the scaler channels:
+#   This is a TCL script with commands:
+#        'channel'  - to define a chanel name/buffer position correspondence
+#        'page'     - To define a scaler page.
+#        'display_single' - To define a single scaler line in a page.
+#        
+############################################################################# 
+
+# FIRST SCALER #########################################
+
+# QUADRANT A
+channel QuadA.01 0
+channel QuadA.02 1
+channel QuadA.03 2
+channel QuadA.04 3
+channel QuadA.05 4
+channel QuadA.06 5
+channel QuadA.07 6
+channel QuadA.08 7
+channel QuadA.09 8
+channel QuadA.10 9
+channel QuadA.11 10
+channel QuadA.12 11
+channel QuadA.13 12
+channel QuadA.14 13
+channel QuadA.15 14
+channel QuadA.16 15
+
+#QUADRANT B  
+channel QuadB.01 16
+channel QuadB.02 17
+channel QuadB.03 18
+channel QuadB.04 19
+channel QuadB.05 20
+channel QuadB.06 21
+channel QuadB.07 22
+channel QuadB.08 23
+channel QuadB.09 24
+channel QuadB.10 25
+channel QuadB.11 26
+channel QuadB.12 27
+channel QuadB.13 28
+channel QuadB.14 29
+channel QuadB.15 30
+channel QuadB.16 31
+ 
+
+#  Next define the pages, their long titles, the tab name and their contents
+
+# First page: raw QuadA	 
+page QuadA  "QuadA Scaler signals"
+display_single QuadA QuadA.01
+display_single QuadA QuadA.02
+display_single QuadA QuadA.03
+display_single QuadA QuadA.04
+display_single QuadA QuadA.05
+display_single QuadA QuadA.06
+display_single QuadA QuadA.07
+display_single QuadA QuadA.08
+display_single QuadA QuadA.09
+display_single QuadA QuadA.10
+display_single QuadA QuadA.11
+display_single QuadA QuadA.12
+display_single QuadA QuadA.13
+display_single QuadA QuadA.14
+display_single QuadA QuadA.15
+display_single QuadA QuadA.16
+
+# Second page: raw QuadB 
+page QuadB  "QuadB Scaler signals"
+display_single QuadB QuadB.01
+display_single QuadB QuadB.02 
+display_single QuadB QuadB.03
+display_single QuadB QuadB.04
+display_single QuadB QuadB.05
+display_single QuadB QuadB.06
+display_single QuadB QuadB.07
+display_single QuadB QuadB.08
+display_single QuadB QuadB.09
+display_single QuadB QuadB.10
+display_single QuadB QuadB.11
+display_single QuadB QuadB.12
+display_single QuadB QuadB.13
+display_single QuadB QuadB.14
+display_single QuadB QuadB.15
+display_single QuadB QuadB.16
+
