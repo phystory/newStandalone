@@ -6,28 +6,20 @@ INCLUDE FILES
 */
 
 #include <config.h>
-#ifdef HAVE_STD_NAMESPACE
-using namespace std;
-#endif
 
 #include <wienercamac.h>
 #include <stdio.h>
+#include <fstream>
+#include <iostream>
 #include <stdlib.h>
 #ifndef __unix__
 #include "cpus.h"
-#endif
-
-#ifdef __unix__
-#include <stdlib.h>
-#include <daqinterface.h>
-#include <spectrodaq.h>
 #endif
 
 //#include <lcldaqtypes.h>
 #include <daqdatatypes.h>
 #include <camac.h>
 #include <macros.h>
-#include <param.h>
 //#include <slvshared.h>  /*don't know if there is a replacement file for this*/
 
 #ifdef VME16
@@ -41,6 +33,10 @@ using namespace std;
 #include <vme.h>
 #endif
 #include <buftypes.h>
+
+#ifdef HAVE_STD_NAMESPACE
+using namespace std;
+#endif
 
 
 /* Short circuit run time evaluation of constant BCNAF's */
@@ -115,7 +111,7 @@ extern UINT32 CAMBAS;
  
 int initwushapers_nero()
 {
-   FILE *fp;
+   std::ifstream fp;
    int isl[MAX_SHAPER];     /* list of slot numbers  */
    int ibr[MAX_SHAPER];     /* list of branch numbers */
    int icr[MAX_SHAPER];     /* list of crate numbers */
@@ -132,26 +128,26 @@ int initwushapers_nero()
    printf("\n");   
 
    i=0;
-   fp=fopen("shaper_init_nero.dat","r");
-   if (fp==(FILE *)NULL) return 0;   
-   while(!feof(fp))
+   fp.open("shaper_init_nero.dat",std::ios::in);
+   if (fp==NULL) return 0;   
+   while(!fp.eof())
    {
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s",line);
      if (line[0]=='+') goto done2;
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s",line);
      sscanf(line," %d %d %d %d ",&ibr[i],&icr[i],&isl[i],&uw2[i]);  
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s",line);
      sscanf(line," %d %d %d %d  ",&uw[i][0],&uw[i][1],&uw[i][2],&uw[i][3]);
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s",line);
      sscanf(line," %d %d %d %d  ",&uw[i][4],&uw[i][5],&uw[i][6],&uw[i][7]);
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s",line);
      sscanf(line," %d %d %d %d  ",&uw[i][8],&uw[i][9],&uw[i][10],&uw[i][11]);
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s\n",line);
      sscanf(line," %d %d %d %d  ",&uw[i][12],&uw[i][13],&uw[i][14],&uw[i][15]);       
      printf("Shaper %d: ",i+1);
@@ -166,7 +162,7 @@ int initwushapers_nero()
    }
    done2:
    nshaper=i;
-   fclose(fp);
+   fp.close();
    
    /* setting gains */
    /* writing sequence is 
@@ -192,8 +188,12 @@ int initwushapers_nero()
    {
    
      /* send a write cycle */
+     printf("Sending the first write to CAMAC; ");
+     printf(" %d %d %d %d\n",ibr[i],icr[i],isl[i],uw2[i]);  
      camwrite16(ibr[i],icr[i],isl[i],1,16,4);
+     printf("Sending the second write to CAMAC:\n");
      camwrite16(ibr[i],icr[i],isl[i],1,16,6);
+     printf("Sending the third write to CAMAC:\n");
      camwrite16(ibr[i],icr[i],isl[i],1,16,4);
      
      ic=0;

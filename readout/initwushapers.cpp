@@ -158,6 +158,7 @@ int initwushapers()
      printf("Shaper %d: ",i+1);
      printf("Branch %d Crate %d Slot %d \n",ibr[i],icr[i],isl[i]);   
      printf("\n");   
+     printf("Here:\n");
      i++;
      if (i>=MAX_SHAPER) {
         printf("Oops -- I have room for 16 shapers; you'll have to \n");
@@ -165,6 +166,7 @@ int initwushapers()
 	exit(1);
      }
    }
+   printf("\n");   
    done2:
    nshaper=i;
    fclose(fp);
@@ -193,8 +195,11 @@ int initwushapers()
    {
    
      /* send a write cycle */
+     printf("Sending the first write to CAMAC:\n");
      camwrite16(ibr[i],icr[i],isl[i],1,16,4);
+     printf("Sending the second write to CAMAC:\n");
      camwrite16(ibr[i],icr[i],isl[i],1,16,6);
+     printf("Sending the third write to CAMAC:\n");
      camwrite16(ibr[i],icr[i],isl[i],1,16,4);
      
      ic=0;

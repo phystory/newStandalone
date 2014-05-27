@@ -1,14 +1,13 @@
 /*************************************************************************** 
    Readout program for NERO
-   Experiments 03034 & 05028
+   using Ring DAQ of NSCL DAQ 10.2-106
    Program includes:
-    - Updated Production Readout Software (version nscldaq8.0/g++3.3)
+    - Starting from a scratch Skeleton.h/cpp files
     - 1 Wienner VC32 CAMAC Controller (NERO)
     - VME Crate (number 1)
     - CAMAC Crate (number 2)
 
-   J.Pereira. Last version 8/25/2005
-   J.Pereira. Last version 10/24/2005
+   08/25/2014 - First version created by Tony Ahn.
 ***************************************************************************/
 
 #ifndef __NEROSEGMENT_H
@@ -16,9 +15,10 @@
 #endif
 
 #include <config.h>
-#include <spectrodaq.h>
+#include <stdint.h>
 #include <CEventSegment.h>
-#include <CDocumentedPacket.h>
+#include <CCompoundEventSegment.h>
+#include <CEventPacket.h>
 
 #ifndef __VC32WIENNERVC_H
 #include <wienercamac.h> //Include Wienner CAMAC controller
@@ -41,19 +41,17 @@ using namespace std;
 class NEROSegment : public CEventSegment
 {
 private:
-  CDocumentedPacket m_NEROPacket;  
   CAENcard* m_pVMEADC09;
   CAENcard* m_pVMEADC10;
   CAENcard_767* m_pVMETDC02;
   CAENcard* m_pVMEQDC12;    //QDC for readout of scintillators
   CCaenIO* m_pIOREGISTER;
+  bool haveEvent();
   
 public:
-  NEROSegment();
-  virtual void Initialize();
-  virtual void Clear();
-  virtual unsigned int MaxSize();
-  virtual DAQWordBufferPtr& Read(DAQWordBufferPtr& rBuf);
+  virtual void initialize();
+  virtual void clear();
+  virtual size_t read(void* pBuffer, size_t maxwords);
 };
 
 

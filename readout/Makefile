@@ -1,11 +1,16 @@
-INSTDIR=/usr/opt/daq/current
-# User makefile for the Production readout skeleton.  Read the comments
-# in the code below to know what you can modify.
 #
-include $(INSTDIR)/etc/ProductionReadout_Makefile.include
+#  This establishes which version of NSCLDAQ we're using and where it's installed:
+#  Supposedly  you only need to change this definition to update to a newer
+#  version of the software:
+
+INSTDIR=/usr/opt/daq/10.2-106
+
+include $(INSTDIR)/etc/SBSRdoMakeIncludes
+
 
 #
-#   Below, define any additional C++ compilation switches you might need.
+#  The following allow you to add flags to all the default C and C++ compilation
+#  rules.  In most cases C and C++ share the same set of compilation flags so:
 #
 #  If you are using camac you will need to add at least:
 #    -DCESCAMAC  
@@ -13,50 +18,251 @@ include $(INSTDIR)/etc/ProductionReadout_Makefile.include
 # to select between the CES 8210 and WIENER CAMAC interface modules.	
 #Look in this directory to override <CSIS3600.h>
 
-USERCXXFLAGS=-DVC32CAMAC -I.
-#
-#  Below, define any additional C compilation switches you may need.
-#  By default, this is defined to be the same as the C++ additional
-#  switches:
+USERCCFLAGS=
+USERCXXFLAGS=$(USERCCFLAGS) -I/usr/include -I. -I$(INSTDIR)/include \
+				-I$(INSTDIR)/include/sbsreadout\
+				-I/usr/lib/gcc/x86_64-linux-gnu/4.7.2/include -DVC32CAMAC
 
-USERCCFLAGS=$(USERCXXFLAGS)
+#  If you have additional load flags (e.g. library dirs and libs):
 
-#
-#  Below, define any additional linker flags you may need:
-#
-
-USERLDFLAGS= 
+USERLDFLAGS=
 
 #
-#  Add any objects you require to the defintion below. Note that the 
-#  Makefile knows by default how to correctly compile most C++ and C files.
-#  Unless ther are problems, don't add any compilation rules for your objects.
-#
-#
-#   If you are using a 'traditional readout skeleton,
-#  Comment the Objects line two down and  uncomment the next line:
-#
-#Objects= Skeleton.o CTraditionalEventSegment.o CTraditionalScalerReadout.o
-Objects=NEROSkeleton.o NEROSegment.o NEROScaler.o \
+#  This is a list of the objects that go into making the application
+#  Make, in most cases will figure out how to build them:
+
+OBJECTS=Skeleton.o NEROADC.o NEROQDC.o NEROTDC.o NEROIO.o \
 	initwushapers_nero.o initwucfds_nero.o \
 	param.o 
 
-#
+Readout: $(OBJECTS)
+	$(CXXLD) -o Readout $(OBJECTS) $(USERLDFLAGS) $(LDFLAGS)
 
-Readout: $(Objects)
-	$(CXXLD) -o Readout  $(Objects) $(USERLDFLAGS) $(LDFLAGS)
-
-clean:
-	rm -f $(Objects) Readout
+clean:  
+	rm -f $(OBJECTS) Readout
 
 depend:
-	makedepend $(USERCXXFLAGS) *.cpp
+	makedepend $(USERCXXFLAGS) *.cpp *.c 
+
 
 help:
-	echo "make       - Create the readout program."
-	echo "make clean - Clean up objects etc. created by previous builds"
-	echo "make depend- Add include file dependencies to the Makefile."
+	echo make           - Build Readout.
+	echo make clean     - Remove products from previous builds.
+	echo make depend    - Add header dependencies to Makefile.
 
+# DO NOT DELETE
 
-
-
+initwucfds.o: /usr/opt/daq/10.2-106/include/wienercamac.h
+initwucfds.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+initwucfds.o: /usr/opt/daq/10.2-106/include/wienermacros.h
+initwucfds.o: /usr/include/stdio.h /usr/include/features.h
+initwucfds.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+initwucfds.o: /usr/include/libio.h /usr/include/_G_config.h
+initwucfds.o: /usr/include/wchar.h
+initwucfds.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+initwucfds.o: /usr/include/unistd.h /usr/include/getopt.h
+initwucfds.o: /usr/opt/daq/10.2-106/include/camac.h /usr/include/stdint.h
+initwucfds.o: /usr/opt/daq/10.2-106/include/config.h /usr/include/stdlib.h
+initwucfds.o: /usr/include/alloca.h /usr/opt/daq/10.2-106/include/macros.h
+initwucfds.o: ./param.h /usr/opt/daq/10.2-106/include/buftypes.h
+initwucfds_nero.o: /usr/opt/daq/10.2-106/include/config.h
+initwucfds_nero.o: /usr/opt/daq/10.2-106/include/wienercamac.h
+initwucfds_nero.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+initwucfds_nero.o: /usr/opt/daq/10.2-106/include/wienermacros.h
+initwucfds_nero.o: /usr/include/stdio.h /usr/include/features.h
+initwucfds_nero.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+initwucfds_nero.o: /usr/include/libio.h /usr/include/_G_config.h
+initwucfds_nero.o: /usr/include/wchar.h
+initwucfds_nero.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+initwucfds_nero.o: /usr/include/unistd.h /usr/include/getopt.h
+initwucfds_nero.o: /usr/opt/daq/10.2-106/include/camac.h
+initwucfds_nero.o: /usr/include/stdint.h /usr/include/stdlib.h
+initwucfds_nero.o: /usr/include/alloca.h
+initwucfds_nero.o: /usr/opt/daq/10.2-106/include/macros.h
+initwucfds_nero.o: /usr/opt/daq/10.2-106/include/buftypes.h
+initwushapers.o: /usr/opt/daq/10.2-106/include/wienercamac.h
+initwushapers.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+initwushapers.o: /usr/opt/daq/10.2-106/include/wienermacros.h
+initwushapers.o: /usr/include/stdio.h /usr/include/features.h
+initwushapers.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+initwushapers.o: /usr/include/libio.h /usr/include/_G_config.h
+initwushapers.o: /usr/include/wchar.h
+initwushapers.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+initwushapers.o: /usr/include/unistd.h /usr/include/getopt.h
+initwushapers.o: /usr/opt/daq/10.2-106/include/camac.h /usr/include/stdint.h
+initwushapers.o: /usr/opt/daq/10.2-106/include/config.h /usr/include/stdlib.h
+initwushapers.o: /usr/include/alloca.h /usr/opt/daq/10.2-106/include/macros.h
+initwushapers.o: ./param.h /usr/opt/daq/10.2-106/include/buftypes.h
+initwushapers_nero.o: /usr/opt/daq/10.2-106/include/config.h
+initwushapers_nero.o: /usr/opt/daq/10.2-106/include/wienercamac.h
+initwushapers_nero.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+initwushapers_nero.o: /usr/opt/daq/10.2-106/include/wienermacros.h
+initwushapers_nero.o: /usr/include/stdio.h /usr/include/features.h
+initwushapers_nero.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+initwushapers_nero.o: /usr/include/libio.h /usr/include/_G_config.h
+initwushapers_nero.o: /usr/include/wchar.h
+initwushapers_nero.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+initwushapers_nero.o: /usr/include/unistd.h /usr/include/getopt.h
+initwushapers_nero.o: /usr/opt/daq/10.2-106/include/camac.h
+initwushapers_nero.o: /usr/include/stdint.h /usr/include/stdlib.h
+initwushapers_nero.o: /usr/include/alloca.h
+initwushapers_nero.o: /usr/opt/daq/10.2-106/include/macros.h
+initwushapers_nero.o: /usr/opt/daq/10.2-106/include/buftypes.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/config.h NEROADC.h
+NEROADC.o: /usr/include/stdint.h /usr/include/features.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+NEROADC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/CAENcard.h /usr/include/stdio.h
+NEROADC.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+NEROADC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+NEROADC.o: /usr/include/errno.h /usr/include/fcntl.h /usr/include/time.h
+NEROADC.o: /usr/include/unistd.h /usr/include/getopt.h /usr/include/signal.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/CVME.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/RangeError.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/Exception.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/MmapError.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/Refptr.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/config.h NEROIO.h
+NEROIO.o: /usr/include/stdint.h /usr/include/features.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+NEROIO.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/wienercamac.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/wienermacros.h /usr/include/stdio.h
+NEROIO.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+NEROIO.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+NEROIO.o: /usr/include/unistd.h /usr/include/getopt.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/camac.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/CaenIO.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/CVME.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/RangeError.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/Exception.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/MmapError.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/Refptr.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/config.h NEROQDC.h
+NEROQDC.o: /usr/include/stdint.h /usr/include/features.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+NEROQDC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/CAENcard.h /usr/include/stdio.h
+NEROQDC.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+NEROQDC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+NEROQDC.o: /usr/include/errno.h /usr/include/fcntl.h /usr/include/time.h
+NEROQDC.o: /usr/include/unistd.h /usr/include/getopt.h /usr/include/signal.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/CVME.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/RangeError.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/Exception.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/MmapError.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/Refptr.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/config.h NEROSegment.h
+NEROSegment.o: /usr/include/stdint.h /usr/include/features.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+NEROSegment.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CCompoundEventSegment.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CComposite.h
+NEROSegment.o: /usr/include/unistd.h /usr/include/getopt.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventPacket.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CDocumentedPacket.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/wienercamac.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/wienermacros.h
+NEROSegment.o: /usr/include/stdio.h /usr/include/libio.h
+NEROSegment.o: /usr/include/_G_config.h /usr/include/wchar.h
+NEROSegment.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/camac.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CAENcard.h /usr/include/errno.h
+NEROSegment.o: /usr/include/fcntl.h /usr/include/time.h /usr/include/signal.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CVME.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/RangeError.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/Exception.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/MmapError.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/Refptr.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CAENcard_767.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CaenIO.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/config.h NEROTDC.h
+NEROTDC.o: /usr/include/stdint.h /usr/include/features.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+NEROTDC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/CAENcard_767.h /usr/include/stdio.h
+NEROTDC.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+NEROTDC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+NEROTDC.o: /usr/include/errno.h /usr/include/fcntl.h /usr/include/time.h
+NEROTDC.o: /usr/include/unistd.h /usr/include/getopt.h /usr/include/signal.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/CVME.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/RangeError.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/Exception.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/MmapError.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/Refptr.h
+param.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+param.o: /usr/include/stdlib.h /usr/include/features.h /usr/include/alloca.h
+param.o: /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h
+param.o: /usr/include/wchar.h
+param.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+param.o: /usr/include/string.h /usr/include/xlocale.h ./param.h
+param.o: /usr/opt/daq/10.2-106/include/config.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/config.h ./Skeleton.h NEROADC.h
+Skeleton.o: /usr/include/stdint.h /usr/include/features.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+Skeleton.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CAENcard.h /usr/include/stdio.h
+Skeleton.o: /usr/include/libio.h /usr/include/_G_config.h
+Skeleton.o: /usr/include/wchar.h
+Skeleton.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+Skeleton.o: /usr/include/errno.h /usr/include/fcntl.h /usr/include/time.h
+Skeleton.o: /usr/include/unistd.h /usr/include/getopt.h /usr/include/signal.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CVME.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/RangeError.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/Exception.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/MmapError.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/Refptr.h NEROTDC.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CAENcard_767.h NEROQDC.h NEROIO.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/wienercamac.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/wienermacros.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/camac.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CaenIO.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CReadoutMain.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/TCLApplication.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/TCLInterpreterObject.h
+Skeleton.o: /usr/include/assert.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/options.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CCompoundEventSegment.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CComposite.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CExperiment.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventPacket.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CDocumentedPacket.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/TCLInterpreter.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/TCLString.h /usr/include/string.h
+Skeleton.o: /usr/include/xlocale.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CTimedTrigger.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventTrigger.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CCAENV262Trigger.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CCAENV262Busy.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CBusy.h
+Skeleton.o: /usr/include/stdlib.h /usr/include/alloca.h

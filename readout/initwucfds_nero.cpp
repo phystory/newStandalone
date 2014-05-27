@@ -7,28 +7,20 @@ INCLUDE FILES
 
 
 #include <config.h>
-#ifdef HAVE_STD_NAMESPACE
-using namespace std;
-#endif
 
 #include <wienercamac.h>
 #include <stdio.h>
+#include <fstream>
+#include <iostream>
 #include <stdlib.h>
 #ifndef __unix__
 #include "cpus.h"
-#endif
-
-#ifdef __unix__
-#include <stdlib.h>
-#include <daqinterface.h>
-#include <spectrodaq.h>
 #endif
 
 //#include <lcldaqtypes.h>
 #include <daqdatatypes.h>
 #include <camac.h>
 #include <macros.h>
-#include <param.h>
 //#include <slvshared.h>
 
 #ifdef VME16
@@ -42,6 +34,10 @@ using namespace std;
 #include <vme.h>
 #endif
 #include <buftypes.h>
+
+#ifdef HAVE_STD_NAMESPACE
+using namespace std;
+#endif
 
 /* Short circuit run time evaluation of constant BCNAF's */
 /*
@@ -106,7 +102,7 @@ extern UINT32 CAMBAS;
 
 int initwucfds_nero()
 {
-   FILE *fp;
+   std::ifstream fp;
    int isl[MAX_CFD];     /* list of slot numbers  */
    int ibr[MAX_CFD];     /* list of branch numbers */
    int icr[MAX_CFD]; 	 /* list of crate numbers */
@@ -122,36 +118,35 @@ int initwucfds_nero()
    printf("Initialize CFD:\n");
    printf("\n");   
 
-
    /* Read cfd data from file 
     * We can make this much fancier later if we want to.
     */
    i=0;
-   fp=fopen("cfd_init_nero.dat","r");  
-   if (fp==(FILE *)NULL) return 0; 
-   while (!feof(fp))
+   fp.open("cfd_init_nero.dat",std::ios::in);
+   if (fp==NULL) return 0; 
+   while (!fp.eof())
    {   
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s",line);
      if (line[0]=='+') goto done;
 
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s",line);
      
      sscanf(line," %d %d %d %d ",&ibr[i],&icr[i],&isl[i],&isel[i]);  
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s",line);
      
      sscanf(line," %d %d %d %d  ",&uw[i][0],&uw[i][1],&uw[i][2],&uw[i][3]);
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s",line);
      
      sscanf(line," %d %d %d %d  ",&uw[i][4],&uw[i][5],&uw[i][6],&uw[i][7]);
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s",line);
      
      sscanf(line," %d %d %d %d  ",&uw[i][8],&uw[i][9],&uw[i][10],&uw[i][11]);
-     getline(fp,line);
+     fp.getline(line,127);
      printf("%s\n",line);
      
      sscanf(line," %d %d %d %d  ",&uw[i][12],&uw[i][13],&uw[i][14],&uw[i][15]);       
@@ -166,7 +161,7 @@ int initwucfds_nero()
    }
    done:
    ncfd=i;
-   fclose(fp);
+   fp.close();
 
    /* Loop over all cfd modules and all channels*/
    for (i=0; i<ncfd; i++)

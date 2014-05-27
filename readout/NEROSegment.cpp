@@ -68,91 +68,14 @@
 
 
 #include <config.h>
-#ifdef HAVE_STD_NAMESPACE
-using namespace std;
-#endif
-
 
 #ifndef __NEROSEGMENT_H
 #include "NEROSegment.h"
 #endif
 
-#define NEROPACKET 0x5100
-
-/* Define location of VME ADCs */
-#define VMEADC09_N 9  /* NERO Quad A & B */
-#define VMEADC10_N 10 /* NERO Quad C & D */
-
-/*Define location of VME TDC */
-#define VMETDC02_N 20 /* NERO TDC */
-
-/*Define location of VME QDC */
-#define VMEQDC12 0x0c000000   /*CRS QDC base address*/
-#define VMEQDC12_N 12         /*slot number of QDC*/
-
-/* Define base address of General Purpose IO Register (CaenIO.h)*/
-#define BASEVMEIO 0x444400 
-
-
-/* Define maximun readout time of VME modules*/
-#define CAENTIMEOUT 100
-
-/* Define VME Crate number */
-#define CRATENUM1 0
-
-/* INCLUDE FILES */
-/* The following include files were copied from the traditional Readout Software */
-
-#include <string>
-
-#include <stdio.h>
-
-#include <Nimout.h>
-
-#ifndef __unix__
-#include "cpus.h"
-#endif
-
-#ifdef __unix__
-#include <stdlib.h>
-#include <daqinterface.h>
-#include <spectrodaq.h>
-#endif
-
-#include <daqdatatypes.h>
-#include <camac.h>
-#include <macros.h>
-
-#include "param.h"
-
-#ifdef VME16
-#undef VME16
-#endif
-#if CPU == MICROPROJECT
-#define VME16 0	
-#endif
-
-#ifndef __unix__
-#include <vme.h>
-#endif
-#include <buftypes.h>
-
-/* Short circuit run time evaluation of constant BCNAF's */
-
-#ifdef __unix__
-#include <camac.h>
-#else
-#if CPU == IRONICS
-#undef CAMBAS
-#define CAMBAS(b)	0xFA800000
-#endif
-
-#if CPU == MICROPROJECT
-#undef CAMBAS
-#define CAMBAS(b)	0xFE800000
-#endif
-#endif
-
+#include <CAENcard.h>  //Necessary for readout of CAEN VME modules 
+#include <CCompoundEventSegment.h>
+#include <CEventPacket.h>
 
 
 ///* Declare functions to initialize PicoSystems 16-ch. shaper/CFD modules
@@ -165,18 +88,17 @@ int ADC09_thresh;
 int ADC10_thresh;
 int Readout_NERO;
 
-static char* pPacketVersion="1.0";  // Version of the packet.
+const std::string sNEROPacket="NEROPacket";
+const std::string sNEROVME="NERO VME-CAMAC packet";
+const std::string sPacketVersion="1.0";
 
 
 /*
   Constructor:  Initialize the documented packet.
 */
+//NEROSegment::NEROSegment(uint32_t base, uint8_t id, int packet, int crate)  :
 NEROSegment::NEROSegment()  :
-  m_NEROPacket(NEROPACKET, 
-		 string("NEROPacket"),
-		 string("NERO VME-CAMAC packet"),
-		 string(pPacketVersion)
-		 ),
+  m_NEROPacket(0),
     m_pVMEADC09(0),
     m_pVMEADC10(0),
   m_pVMETDC02(0),
@@ -186,7 +108,7 @@ NEROSegment::NEROSegment()  :
 {
 }
 
-void NEROSegment::Initialize()
+void NEROSegment::initialize()
 {
 
   cout << "Initializing NERO" << endl;
@@ -283,7 +205,7 @@ void NEROSegment::Initialize()
 
 
 
-void NEROSegment::Clear()
+void NEROSegment::clear()
 { 
   if (Readout_NERO) {
         m_pVMEADC09->clearData(); /* Clear CAEN V785 ADC1 */
@@ -294,16 +216,8 @@ void NEROSegment::Clear()
   }
 }
 
-
-
-unsigned int NEROSegment::MaxSize()
-{
- /* Define the size, in words, of the largest possible physics event */
-  return 1000;
-  }    							      
-
-
-DAQWordBufferPtr& NEROSegment::Read(DAQWordBufferPtr& rBuf)
+size_t
+NEROSegment::read(void* pBuffer, size_t maxwords)
 {
 
   int i,j; // Counter index 

@@ -1,2 +1,0 @@
-export TCLLIBPATH="/usr/opt/daq/8.0/TclLibs /usr/opt/daq/8.0/Scripts"
-/usr/opt/daq/8.0/Scripts/ReadoutShell.tcl spdaq28 /user/nerotest/Standalone/readout/Readout spdaq28
