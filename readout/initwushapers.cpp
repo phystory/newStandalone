@@ -158,7 +158,6 @@ int initwushapers()
      printf("Shaper %d: ",i+1);
      printf("Branch %d Crate %d Slot %d \n",ibr[i],icr[i],isl[i]);   
      printf("\n");   
-     printf("Here:\n");
      i++;
      if (i>=MAX_SHAPER) {
         printf("Oops -- I have room for 16 shapers; you'll have to \n");
@@ -182,7 +181,7 @@ int initwushapers()
     * 3) send 8 bits with data (channel 16)
     * 4) send 8 bits with data (channel 15)
     * 5) send 1 bit (0)
-    * 6) send 8 bits with data (channel 16) 
+    * 6) snd 8 bits with data (channel 16) 
     * 7) send 8 bits with data (channel 15)
     * 8) send 1 bit (0)
     * ...

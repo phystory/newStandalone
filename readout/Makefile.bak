@@ -1,0 +1,200 @@
+#
+#  This establishes which version of NSCLDAQ we're using and where it's installed:
+#  Supposedly  you only need to change this definition to update to a newer
+#  version of the software:
+
+INSTDIR=/usr/opt/daq/10.2-106
+
+include $(INSTDIR)/etc/SBSRdoMakeIncludes
+
+
+#
+#  The following allow you to add flags to all the default C and C++ compilation
+#  rules.  In most cases C and C++ share the same set of compilation flags so:
+#
+#  If you are using camac you will need to add at least:
+#    -DCESCAMAC  
+# or -DVC32CAMAC
+# to select between the CES 8210 and WIENER CAMAC interface modules.	
+#Look in this directory to override <CSIS3600.h>
+
+USERCCFLAGS=
+USERCXXFLAGS=$(USERCCFLAGS) -I/usr/include -I. -I$(INSTDIR)/include \
+				-I$(INSTDIR)/include/sbsreadout\
+				-I/usr/lib/gcc/x86_64-linux-gnu/4.7.2/include -DVC32CAMAC
+
+#  If you have additional load flags (e.g. library dirs and libs):
+
+USERLDFLAGS=
+
+#
+#  This is a list of the objects that go into making the application
+#  Make, in most cases will figure out how to build them:
+
+OBJECTS=Skeleton.o NEROADC.o NEROQDC.o NEROTDC.o NEROIO.o \
+	initwushapers_nero.o initwucfds_nero.o \
+	param.o 
+
+Readout: $(OBJECTS)
+	$(CXXLD) -o Readout $(OBJECTS) $(USERLDFLAGS) $(LDFLAGS)
+
+clean:  
+	rm -f $(OBJECTS) Readout
+
+depend:
+	makedepend $(USERCXXFLAGS) *.cpp *.c 
+
+
+help:
+	echo make           - Build Readout.
+	echo make clean     - Remove products from previous builds.
+	echo make depend    - Add header dependencies to Makefile.
+
+# DO NOT DELETE
+
+NEROADC.o: /usr/opt/daq/10.2-106/include/config.h NEROADC.h
+NEROADC.o: /usr/include/stdint.h /usr/include/features.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+NEROADC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/CAENcard.h /usr/include/stdio.h
+NEROADC.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+NEROADC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+NEROADC.o: /usr/include/errno.h /usr/include/fcntl.h /usr/include/time.h
+NEROADC.o: /usr/include/unistd.h /usr/include/getopt.h /usr/include/signal.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/CVME.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/RangeError.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/Exception.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/MmapError.h
+NEROADC.o: /usr/opt/daq/10.2-106/include/Refptr.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/config.h NEROIO.h
+NEROIO.o: /usr/include/stdint.h /usr/include/features.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+NEROIO.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/wienercamac.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/wienermacros.h /usr/include/stdio.h
+NEROIO.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+NEROIO.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+NEROIO.o: /usr/include/unistd.h /usr/include/getopt.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/camac.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/CaenIO.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/CVME.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/RangeError.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/Exception.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/MmapError.h
+NEROIO.o: /usr/opt/daq/10.2-106/include/Refptr.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/config.h NEROQDC.h
+NEROQDC.o: /usr/include/stdint.h /usr/include/features.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+NEROQDC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/CAENcard.h /usr/include/stdio.h
+NEROQDC.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+NEROQDC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+NEROQDC.o: /usr/include/errno.h /usr/include/fcntl.h /usr/include/time.h
+NEROQDC.o: /usr/include/unistd.h /usr/include/getopt.h /usr/include/signal.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/CVME.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/RangeError.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/Exception.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/MmapError.h
+NEROQDC.o: /usr/opt/daq/10.2-106/include/Refptr.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/config.h NEROSegment.h
+NEROSegment.o: /usr/include/stdint.h /usr/include/features.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+NEROSegment.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CCompoundEventSegment.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CComposite.h
+NEROSegment.o: /usr/include/unistd.h /usr/include/getopt.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventPacket.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/sbsreadout/CDocumentedPacket.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/wienercamac.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/wienermacros.h
+NEROSegment.o: /usr/include/stdio.h /usr/include/libio.h
+NEROSegment.o: /usr/include/_G_config.h /usr/include/wchar.h
+NEROSegment.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/camac.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CAENcard.h /usr/include/errno.h
+NEROSegment.o: /usr/include/fcntl.h /usr/include/time.h /usr/include/signal.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CVME.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/RangeError.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/Exception.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/MmapError.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/Refptr.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CAENcard_767.h
+NEROSegment.o: /usr/opt/daq/10.2-106/include/CaenIO.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/config.h NEROTDC.h
+NEROTDC.o: /usr/include/stdint.h /usr/include/features.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+NEROTDC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/CAENcard_767.h /usr/include/stdio.h
+NEROTDC.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+NEROTDC.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+NEROTDC.o: /usr/include/errno.h /usr/include/fcntl.h /usr/include/time.h
+NEROTDC.o: /usr/include/unistd.h /usr/include/getopt.h /usr/include/signal.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/CVME.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/RangeError.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/Exception.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/MmapError.h
+NEROTDC.o: /usr/opt/daq/10.2-106/include/Refptr.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/config.h ./Skeleton.h NEROADC.h
+Skeleton.o: /usr/include/stdint.h /usr/include/features.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventSegment.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CObject.h
+Skeleton.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stddef.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CAENcard.h /usr/include/stdio.h
+Skeleton.o: /usr/include/libio.h /usr/include/_G_config.h
+Skeleton.o: /usr/include/wchar.h
+Skeleton.o: /usr/lib/gcc/x86_64-linux-gnu/4.7.2/include/stdarg.h
+Skeleton.o: /usr/include/errno.h /usr/include/fcntl.h /usr/include/time.h
+Skeleton.o: /usr/include/unistd.h /usr/include/getopt.h /usr/include/signal.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CVMEInterface.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/VmeModule.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CVME.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CVMEptr.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/daqdatatypes.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/RangeError.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/Exception.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/MmapError.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/Refptr.h NEROTDC.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CAENcard_767.h NEROQDC.h NEROIO.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/wienercamac.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/wienermacros.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/camac.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/CaenIO.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CReadoutMain.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/TCLApplication.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/TCLInterpreterObject.h
+Skeleton.o: /usr/include/assert.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/options.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CCompoundEventSegment.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CComposite.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CExperiment.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/TCLInterpreter.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/TCLString.h /usr/include/string.h
+Skeleton.o: /usr/include/xlocale.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CTimedTrigger.h
+Skeleton.o: /usr/opt/daq/10.2-106/include/sbsreadout/CEventTrigger.h
+Skeleton.o: /usr/include/stdlib.h /usr/include/alloca.h

@@ -12,9 +12,12 @@ INCLUDE FILES
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
+#include <unistd.h>
 #ifndef __unix__
 #include "cpus.h"
 #endif
+
+#define GetCurrentDir getcwd
 
 //#include <lcldaqtypes.h>
 #include <daqdatatypes.h>
@@ -128,24 +131,29 @@ int initwushapers_nero()
    printf("\n");   
 
    i=0;
-   fp.open("shaper_init_nero.dat",std::ios::in);
-   if (fp==NULL) return 0;   
+   fp.open("/user/nerotest/newStandalone/readou/shaper_init_nero.dat",std::ios::in);
+   if (fp==NULL){
+		 char cCurrentPath[100];
+       GetCurrentDir(cCurrentPath,sizeof(cCurrentPath));
+		 printf("PWD:%s, Hey no file existed!\n",cCurrentPath);
+		 return 0;   
+   }
    while(!fp.eof())
    {
      fp.getline(line,127);
-     printf("%s",line);
+     printf("%s\n",line);
      if (line[0]=='+') goto done2;
      fp.getline(line,127);
-     printf("%s",line);
+     printf("%s\n",line);
      sscanf(line," %d %d %d %d ",&ibr[i],&icr[i],&isl[i],&uw2[i]);  
      fp.getline(line,127);
-     printf("%s",line);
+     printf("%s\n",line);
      sscanf(line," %d %d %d %d  ",&uw[i][0],&uw[i][1],&uw[i][2],&uw[i][3]);
      fp.getline(line,127);
-     printf("%s",line);
+     printf("%s\n",line);
      sscanf(line," %d %d %d %d  ",&uw[i][4],&uw[i][5],&uw[i][6],&uw[i][7]);
      fp.getline(line,127);
-     printf("%s",line);
+     printf("%s\n",line);
      sscanf(line," %d %d %d %d  ",&uw[i][8],&uw[i][9],&uw[i][10],&uw[i][11]);
      fp.getline(line,127);
      printf("%s\n",line);
@@ -188,12 +196,8 @@ int initwushapers_nero()
    {
    
      /* send a write cycle */
-     printf("Sending the first write to CAMAC; ");
-     printf(" %d %d %d %d\n",ibr[i],icr[i],isl[i],uw2[i]);  
      camwrite16(ibr[i],icr[i],isl[i],1,16,4);
-     printf("Sending the second write to CAMAC:\n");
      camwrite16(ibr[i],icr[i],isl[i],1,16,6);
-     printf("Sending the third write to CAMAC:\n");
      camwrite16(ibr[i],icr[i],isl[i],1,16,4);
      
      ic=0;

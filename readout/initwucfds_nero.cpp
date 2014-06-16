@@ -127,23 +127,23 @@ int initwucfds_nero()
    while (!fp.eof())
    {   
      fp.getline(line,127);
-     printf("%s",line);
+     printf("%s\n",line);
      if (line[0]=='+') goto done;
 
      fp.getline(line,127);
-     printf("%s",line);
+     printf("%s\n",line);
      
      sscanf(line," %d %d %d %d ",&ibr[i],&icr[i],&isl[i],&isel[i]);  
      fp.getline(line,127);
-     printf("%s",line);
+     printf("%s\n",line);
      
      sscanf(line," %d %d %d %d  ",&uw[i][0],&uw[i][1],&uw[i][2],&uw[i][3]);
      fp.getline(line,127);
-     printf("%s",line);
+     printf("%s\n",line);
      
      sscanf(line," %d %d %d %d  ",&uw[i][4],&uw[i][5],&uw[i][6],&uw[i][7]);
      fp.getline(line,127);
-     printf("%s",line);
+     printf("%s\n",line);
      
      sscanf(line," %d %d %d %d  ",&uw[i][8],&uw[i][9],&uw[i][10],&uw[i][11]);
      fp.getline(line,127);
@@ -151,7 +151,7 @@ int initwucfds_nero()
      
      sscanf(line," %d %d %d %d  ",&uw[i][12],&uw[i][13],&uw[i][14],&uw[i][15]);       
      printf("CFD %d :",i);
-     printf("%d %d %d \n",ibr[i],icr[i],isl[i]);   
+     printf("B%d C%d S%d \n",ibr[i],icr[i],isl[i]);   
      i++;
      if (i>=MAX_CFD) {
         printf("OOps i have room for 16 CFDS you'll have to hack\n");
@@ -181,7 +181,7 @@ int initwucfds_nero()
 	 /* no channel selected */
 	 /* put a 1xx1 1xxx --> 1111 1111 = 0xFF */
 	 camwrite16(ibr[i],icr[i],isl[i],0,16,0x00FF);	/* register is only 8 bits */
-	 printf("CFD %d %d %d has no test output selected\n",ibr[i],icr[i],isl[i]);
+	 printf("CFD B%d C%d S%d has no test output selected\n",ibr[i],icr[i],isl[i]);
        }
      else
        {
@@ -197,7 +197,7 @@ int initwucfds_nero()
 	 dd=dd&0x00FF;		/* register is only 8 bits wide */
 	 //          printf("debug %d\n",dd);
 	 camwrite16(ibr[i],icr[i],isl[i],0,16,dd);
-	 printf("CFD %d %d %d has channel %d on the test output\n",ibr[i],icr[i],isl[i],isel[i]);
+	 printf("CFD B%d C%d S%d has channel %d on the test output\n",ibr[i],icr[i],isl[i],isel[i]);
        }
      
      
